@@ -1,7 +1,690 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Homepage</title>
+  <style>
+    :root {
+      --bg: #07111f;
+      --bg-soft: rgba(7, 17, 31, 0.72);
+      --panel: rgba(9, 28, 49, 0.75);
+      --panel-strong: rgba(11, 34, 59, 0.92);
+      --line: rgba(142, 221, 255, 0.18);
+      --text: #eaf8ff;
+      --muted: #9fbed0;
+      --accent: #66f0ff;
+      --accent-2: #ffd166;
+      --accent-3: #6df7c1;
+      --shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--text);
+      font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(102, 240, 255, 0.18), transparent 30%),
+        radial-gradient(circle at 85% 20%, rgba(255, 209, 102, 0.14), transparent 25%),
+        radial-gradient(circle at 50% 100%, rgba(109, 247, 193, 0.15), transparent 35%),
+        linear-gradient(135deg, #040b15 0%, #09192e 45%, #06101d 100%);
+      overflow-x: hidden;
+    }
+
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      inset: auto;
+      width: 28rem;
+      height: 28rem;
+      border-radius: 50%;
+      filter: blur(90px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    body::before {
+      top: -8rem;
+      right: -10rem;
+      background: rgba(102, 240, 255, 0.18);
+    }
+
+    body::after {
+      bottom: -10rem;
+      left: -8rem;
+      background: rgba(255, 209, 102, 0.14);
+    }
+
+    .shell {
+      position: relative;
+      z-index: 1;
+      width: min(1180px, calc(100% - 32px));
+      margin: 24px auto;
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(22px);
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      padding: 10px 8px 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .brand-mark {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      box-shadow: 0 14px 30px rgba(102, 240, 255, 0.22);
+    }
+
+    .brand-copy strong,
+    .brand-copy span {
+      display: block;
+    }
+
+    .brand-copy strong {
+      font-size: 1rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .brand-copy span {
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    .menu {
+      display: flex;
+      gap: 10px;
+      padding: 6px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .menu-button {
+      border: 0;
+      color: var(--text);
+      background: transparent;
+      padding: 10px 18px;
+      border-radius: 999px;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: transform 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .menu-button:hover,
+    .menu-button:focus-visible {
+      transform: translateY(-1px);
+      background: rgba(255, 255, 255, 0.08);
+      outline: none;
+    }
+
+    .menu-button.active {
+      color: #05111a;
+      background: linear-gradient(135deg, var(--accent), #c2fbff);
+      box-shadow: 0 12px 28px rgba(102, 240, 255, 0.24);
+    }
+
+    .panel {
+      display: none;
+      animation: rise 0.6s ease;
+    }
+
+    .panel.active {
+      display: block;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 24px;
+      align-items: stretch;
+      min-height: 72vh;
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 26px;
+      background: linear-gradient(180deg, rgba(10, 26, 45, 0.9), rgba(7, 17, 31, 0.76));
+      padding: 28px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(145deg, rgba(102, 240, 255, 0.08), transparent 35%, rgba(255, 209, 102, 0.05));
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      color: var(--accent);
+      background: rgba(102, 240, 255, 0.08);
+      border: 1px solid rgba(102, 240, 255, 0.16);
+      font-size: 0.88rem;
+      letter-spacing: 0.04em;
+    }
+
+    h1,
+    h2,
+    p {
+      position: relative;
+      z-index: 1;
+    }
+
+    h1 {
+      margin: 20px 0 14px;
+      font-size: clamp(2.6rem, 6vw, 5.6rem);
+      line-height: 0.95;
+      letter-spacing: -0.04em;
+    }
+
+    .lead {
+      max-width: 56ch;
+      color: var(--muted);
+      font-size: 1.05rem;
+      line-height: 1.8;
+    }
+
+    .accent-line {
+      color: var(--accent-2);
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 28px;
+    }
+
+    .stat {
+      padding: 18px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 1.6rem;
+      margin-bottom: 6px;
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 30px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 170px;
+      padding: 14px 20px;
+      border-radius: 16px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+    }
+
+    .button.primary {
+      color: #07111f;
+      background: linear-gradient(135deg, var(--accent), #bffaff);
+      box-shadow: 0 18px 40px rgba(102, 240, 255, 0.22);
+    }
+
+    .button.secondary {
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--line);
+    }
+
+    .button:hover,
+    .button:focus-visible {
+      transform: translateY(-2px);
+      outline: none;
+    }
+
+    .portrait-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .portrait {
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      border-radius: 24px;
+      border: 1px solid var(--line);
+      object-fit: cover;
+      background: #0b1d30;
+    }
+
+    .mini-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .mini-card {
+      padding: 16px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .mini-card strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 0.95rem;
+    }
+
+    .mini-card span {
+      color: var(--muted);
+      font-size: 0.88rem;
+      line-height: 1.6;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+
+    .section-header h2 {
+      margin: 0;
+      font-size: clamp(2rem, 4vw, 3.4rem);
+      letter-spacing: -0.04em;
+    }
+
+    .section-header p {
+      max-width: 44ch;
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .project-card {
+      padding: 20px;
+      border-radius: 24px;
+      background: linear-gradient(180deg, rgba(12, 31, 52, 0.9), rgba(7, 17, 31, 0.78));
+      border: 1px solid var(--line);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+    }
+
+    .project-image {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      border-radius: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      margin-bottom: 18px;
+      background: #0c1f34;
+    }
+
+    .project-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+      color: var(--muted);
+      font-size: 0.84rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .project-card h3 {
+      margin: 0 0 10px;
+      font-size: 1.4rem;
+    }
+
+    .project-card p {
+      margin: 0 0 18px;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .tag {
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      color: var(--accent);
+      background: rgba(102, 240, 255, 0.08);
+      border: 1px solid rgba(102, 240, 255, 0.14);
+    }
+
+    .footer-note {
+      margin-top: 28px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    @keyframes rise {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 900px) {
+      .topbar,
+      .section-header,
+      .hero {
+        grid-template-columns: 1fr;
+        display: grid;
+      }
+
+      .topbar {
+        justify-content: stretch;
+      }
+
+      .menu {
+        justify-content: center;
+      }
+
+      .project-grid,
+      .stats,
+      .mini-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .shell {
+        width: min(100% - 16px, 100%);
+        margin: 8px auto;
+        padding: 14px;
+        border-radius: 22px;
+      }
+
+      .card,
+      .project-card {
+        padding: 18px;
+      }
+
+      h1 {
+        font-size: clamp(2.5rem, 15vw, 4rem);
+      }
+
+      .menu {
+        width: 100%;
+      }
+
+      .menu-button {
+        flex: 1;
+      }
+
+      .button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
 <body>
-<h1>Hello World</h1>
-<p>I'm hosted with GitHub Pages.</p>
+  <main class="shell">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true"></div>
+        <div class="brand-copy">
+          <strong>Your Name</strong>
+          <span>Researcher · Builder · Explorer</span>
+        </div>
+      </div>
+      <nav class="menu" aria-label="Main Navigation">
+        <button class="menu-button active" data-target="home">主页</button>
+        <button class="menu-button" data-target="projects">项目</button>
+      </nav>
+    </header>
+
+    <section class="panel active" id="home">
+      <div class="hero">
+        <article class="card">
+          <span class="eyebrow">Personal Homepage</span>
+          <h1>
+            你好，我是 <span class="accent-line">Your Name</span><br>
+            在研究与创造之间持续推进。
+          </h1>
+          <p class="lead">
+            这里是我的个人主页占位版本。你可以把这里替换成你的真实简介，例如研究方向、技术兴趣、
+            当前关注的问题，以及你希望别人如何快速理解你的工作。整体风格走的是更炫、更有未来感的单页展示路线。
+          </p>
+
+          <div class="stats">
+            <div class="stat">
+              <strong>04</strong>
+              <span>进行中的核心项目</span>
+            </div>
+            <div class="stat">
+              <strong>AI + Web</strong>
+              <span>可替换为你的研究或技术关键词</span>
+            </div>
+            <div class="stat">
+              <strong>Now</strong>
+              <span>欢迎在这里写你当前最关注的主题</span>
+            </div>
+          </div>
+
+          <div class="cta-row">
+            <a class="button primary" href="https://scholar.google.com/citations?user=n5by14UAAAAJ&amp;hl=en" target="_blank" rel="noreferrer">
+              Google Scholar
+            </a>
+            <a class="button secondary" href="#projects-anchor" data-target="projects">
+              查看项目
+            </a>
+          </div>
+        </article>
+
+        <aside class="card portrait-card">
+          <img
+            class="portrait"
+            alt="个人图片占位"
+            src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 1000'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop stop-color='%2366f0ff'/><stop offset='0.5' stop-color='%2308192e'/><stop offset='1' stop-color='%23ffd166'/></linearGradient></defs><rect width='800' height='1000' fill='%23071420'/><circle cx='605' cy='180' r='140' fill='%2366f0ff' fill-opacity='0.28'/><circle cx='230' cy='830' r='180' fill='%23ffd166' fill-opacity='0.2'/><rect x='110' y='130' width='580' height='740' rx='34' fill='url(%23g)' fill-opacity='0.35' stroke='%23d9fbff' stroke-opacity='0.35'/><path d='M285 420c0-63 51-114 115-114s115 51 115 114-51 115-115 115-115-52-115-115zm-35 239c37-54 98-88 165-88s128 34 165 88' stroke='%23f3fdff' stroke-width='28' stroke-linecap='round' fill='none'/><text x='400' y='930' fill='%23f3fdff' font-size='44' font-family='Segoe UI, Arial' text-anchor='middle'>Portrait Placeholder</text></svg>"
+          >
+
+          <div class="mini-grid">
+            <div class="mini-card">
+              <strong>About Me</strong>
+              <span>这里可以写你的学校、实验室、职位或一句有辨识度的自我介绍。</span>
+            </div>
+            <div class="mini-card">
+              <strong>Focus</strong>
+              <span>这里可以写研究兴趣、技术栈或你当前最在意的问题域。</span>
+            </div>
+            <div class="mini-card">
+              <strong>Writing</strong>
+              <span>也可以替换成论文、博客、演讲或其它公开输出的入口。</span>
+            </div>
+            <div class="mini-card">
+              <strong>Contact</strong>
+              <span>这里建议后续补上邮箱、GitHub、LinkedIn 或其它联系方式。</span>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="panel" id="projects">
+      <div class="card" id="projects-anchor">
+        <div class="section-header">
+          <div>
+            <span class="eyebrow">Ongoing Projects</span>
+            <h2>正在推进的四个项目</h2>
+          </div>
+          <p>
+            下面先使用占位符展示四个进行中的项目。后续你只需要把项目名、简介、状态、关键词和图片替换成真实内容即可。
+          </p>
+        </div>
+
+        <div class="project-grid">
+          <article class="project-card">
+            <img
+              class="project-image"
+              alt="项目一占位图"
+              src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 450'><defs><linearGradient id='a' x1='0' y1='0' x2='1' y2='1'><stop stop-color='%2366f0ff'/><stop offset='1' stop-color='%2309182b'/></linearGradient></defs><rect width='800' height='450' fill='%230b1d30'/><rect x='55' y='55' width='690' height='340' rx='28' fill='url(%23a)' fill-opacity='0.4' stroke='%23c2fbff' stroke-opacity='0.35'/><path d='M120 315L250 205l100 70 140-150 170 190' fill='none' stroke='%23f6feff' stroke-width='18' stroke-linecap='round' stroke-linejoin='round'/><circle cx='245' cy='208' r='18' fill='%23ffd166'/><text x='400' y='398' fill='%23effcff' font-size='34' font-family='Segoe UI, Arial' text-anchor='middle'>Project Visual 01</text></svg>"
+            >
+            <div class="project-meta">
+              <span>Project 01</span>
+              <span>In Progress</span>
+            </div>
+            <h3>Strip Loaded Waveguide on LNOI</h3>
+            <p>This project investigates strip-loaded waveguide designs on the lithium niobate on insulator platform, with an emphasis on optical confinement, fabrication compatibility, and device-level integration for photonic applications.</p>
+            <div class="tags">
+              <span class="tag">LNOI</span>
+              <span class="tag">Waveguide Design</span>
+              <span class="tag">Integrated Photonics</span>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <img
+              class="project-image"
+              alt="项目二占位图"
+              src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 450'><defs><linearGradient id='b' x1='0' y1='0' x2='1' y2='1'><stop stop-color='%23ffd166'/><stop offset='1' stop-color='%2309182b'/></linearGradient></defs><rect width='800' height='450' fill='%230b1d30'/><rect x='70' y='70' width='660' height='310' rx='26' fill='url(%23b)' fill-opacity='0.4' stroke='%23fff2cc' stroke-opacity='0.35'/><circle cx='220' cy='225' r='74' fill='none' stroke='%23fff7e0' stroke-width='18'/><circle cx='410' cy='225' r='74' fill='none' stroke='%23fff7e0' stroke-width='18'/><circle cx='600' cy='225' r='74' fill='none' stroke='%23fff7e0' stroke-width='18'/><text x='400' y='400' fill='%23effcff' font-size='34' font-family='Segoe UI, Arial' text-anchor='middle'>Project Visual 02</text></svg>"
+            >
+            <div class="project-meta">
+              <span>Project 02</span>
+              <span>Prototype</span>
+            </div>
+            <h3>ScAlN d31 Characterization</h3>
+            <p>This work focuses on the experimental characterization of the d31 piezoelectric coefficient in scandium aluminum nitride thin films, aiming to support reliable material evaluation and performance benchmarking for electromechanical devices.</p>
+            <div class="tags">
+              <span class="tag">ScAlN</span>
+              <span class="tag">d31 Measurement</span>
+              <span class="tag">Piezoelectric Films</span>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <img
+              class="project-image"
+              alt="项目三占位图"
+              src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 450'><defs><linearGradient id='c' x1='0' y1='0' x2='1' y2='1'><stop stop-color='%236df7c1'/><stop offset='1' stop-color='%2309182b'/></linearGradient></defs><rect width='800' height='450' fill='%230b1d30'/><rect x='60' y='58' width='680' height='330' rx='28' fill='url(%23c)' fill-opacity='0.38' stroke='%23dffff0' stroke-opacity='0.32'/><path d='M160 320V155M300 320V115M440 320V195M580 320V145' stroke='%23effcff' stroke-width='22' stroke-linecap='round'/><path d='M140 320H620' stroke='%23effcff' stroke-width='14' stroke-linecap='round'/><text x='400' y='400' fill='%23effcff' font-size='34' font-family='Segoe UI, Arial' text-anchor='middle'>Project Visual 03</text></svg>"
+            >
+            <div class="project-meta">
+              <span>Project 03</span>
+              <span>Experiment</span>
+            </div>
+            <h3>Acousto Electric Amplifier on LNOI Platform</h3>
+            <p>This project explores acousto-electric amplification mechanisms on the LNOI platform, with the goal of understanding wave-matter interactions and enabling new functionalities for signal control and integrated acoustic devices.</p>
+            <div class="tags">
+              <span class="tag">Acousto-Electric</span>
+              <span class="tag">LNOI Platform</span>
+              <span class="tag">Signal Amplification</span>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <img
+              class="project-image"
+              alt="项目四占位图"
+              src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 450'><defs><linearGradient id='d' x1='0' y1='0' x2='1' y2='1'><stop stop-color='%23ff8f70'/><stop offset='1' stop-color='%2309182b'/></linearGradient></defs><rect width='800' height='450' fill='%230b1d30'/><rect x='62' y='62' width='676' height='326' rx='28' fill='url(%23d)' fill-opacity='0.36' stroke='%23ffe2db' stroke-opacity='0.33'/><path d='M170 280c40-78 108-118 170-118 72 0 103 51 151 51 39 0 66-16 118-70' fill='none' stroke='%23fff1eb' stroke-width='18' stroke-linecap='round'/><circle cx='170' cy='280' r='14' fill='%23fff1eb'/><circle cx='340' cy='162' r='14' fill='%23fff1eb'/><circle cx='491' cy='213' r='14' fill='%23fff1eb'/><circle cx='609' cy='143' r='14' fill='%23fff1eb'/><text x='400' y='401' fill='%23effcff' font-size='34' font-family='Segoe UI, Arial' text-anchor='middle'>Project Visual 04</text></svg>"
+            >
+            <div class="project-meta">
+              <span>Project 04</span>
+              <span>Beta Build</span>
+            </div>
+            <h3>Periodically Poled LN for Acoustic Nonlinearity</h3>
+            <p>This study examines periodically poled lithium niobate structures for acoustic nonlinearity, targeting improved control of nonlinear acoustic behavior and broader opportunities for wave manipulation in advanced material platforms.</p>
+            <div class="tags">
+              <span class="tag">Periodically Poled LN</span>
+              <span class="tag">Acoustic Nonlinearity</span>
+              <span class="tag">Nonlinear Waves</span>
+            </div>
+          </article>
+        </div>
+
+        <p class="footer-note">
+          Google Scholar 按钮已经链接到你的个人学术主页。
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const menuButtons = document.querySelectorAll(".menu-button");
+    const panels = document.querySelectorAll(".panel");
+    const projectShortcut = document.querySelector(".button.secondary");
+
+    function activatePanel(targetId) {
+      panels.forEach((panel) => {
+        panel.classList.toggle("active", panel.id === targetId);
+      });
+
+      menuButtons.forEach((button) => {
+        button.classList.toggle("active", button.dataset.target === targetId);
+      });
+    }
+
+    menuButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        activatePanel(button.dataset.target);
+      });
+    });
+
+    projectShortcut.addEventListener("click", (event) => {
+      event.preventDefault();
+      activatePanel("projects");
+      document.getElementById("projects-anchor").scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  </script>
 </body>
 </html>
