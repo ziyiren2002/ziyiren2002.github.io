@@ -287,12 +287,12 @@
       bottom: 8px;
       width: 320px;
       height: 132px;
+      --cart-shift-x: 0px;
+      --cart-scale: 1;
+      transform: translateX(var(--cart-shift-x)) scale(var(--cart-scale));
+      transform-origin: left bottom;
       transition: transform 1s cubic-bezier(0.22, 1, 0.36, 1);
     }
-
-    .market.is-target-never .cart-group { transform: translateX(70px); }
-    .market.is-target-whiskas .cart-group { transform: translateX(340px); }
-    .market.is-target-raid .cart-group { transform: translateX(610px); }
 
     .cart-guide-note {
       position: absolute;
@@ -509,9 +509,6 @@
       .page { width: min(1180px, calc(100% - 28px)); }
       .shelf-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .market { padding-bottom: 228px; }
-      .market.is-target-never .cart-group { transform: translateX(34px); }
-      .market.is-target-whiskas .cart-group { transform: translateX(270px); }
-      .market.is-target-raid .cart-group { transform: translateX(34px); }
       .market.is-target-never .pickup-stars span:nth-child(1) { left: 160px; top: 104px; }
       .market.is-target-never .pickup-stars span:nth-child(2) { left: 214px; top: 140px; }
       .market.is-target-never .pickup-stars span:nth-child(3) { left: 256px; top: 98px; }
@@ -533,10 +530,7 @@
       .product-info em { font-size: 0.84rem; }
       .product-info span { font-size: 0.86rem; }
       .cart-lane { left: 10px; right: 10px; }
-      .cart-group { transform: scale(0.8); transform-origin: left bottom; }
-      .market.is-target-never .cart-group { transform: translateX(0) scale(0.8); }
-      .market.is-target-whiskas .cart-group { transform: translateX(138px) scale(0.8); }
-      .market.is-target-raid .cart-group { transform: translateX(0) scale(0.8); }
+      .cart-group { --cart-scale: 0.8; }
       .pickup-note { right: 10px; bottom: 126px; font-size: 0.84rem; }
       .market.is-target-never .pickup-stars span:nth-child(1),
       .market.is-target-whiskas .pickup-stars span:nth-child(1) { top: 92px; }
@@ -706,6 +700,8 @@
   <script>
     const market = document.getElementById('market');
     const products = document.querySelectorAll('.product[data-target]');
+    const cartLane = document.querySelector('.cart-lane');
+    const cartGroup = document.getElementById('cartGroup');
     const cartBasket = document.getElementById('cartBasket');
     let navigating = false;
 
@@ -713,46 +709,39 @@
       navigating = false;
       document.body.classList.remove('is-transitioning');
       market.classList.remove('is-guiding', 'is-target-never', 'is-target-whiskas', 'is-target-raid');
+      cartGroup.style.setProperty('--cart-shift-x', '0px');
       document.querySelectorAll('.flying-card').forEach((card) => card.remove());
       products.forEach((product) => {
         product.classList.remove('selected', 'is-hidden');
       });
     }
 
-    function getCartShift(target) {
-      if (window.innerWidth <= 640) {
-        if (target === 'whiskas') {
-          return 138;
-        }
-
-        return 0;
-      }
-
-      if (window.innerWidth <= 900) {
-        if (target === 'whiskas') {
-          return 270;
-        }
-
-        return 34;
-      }
-
-      if (target === 'raid') {
-        return 610;
-      }
-
-      return target === 'whiskas' ? 340 : 70;
+    function clamp(value, min, max) {
+      return Math.min(Math.max(value, min), max);
     }
 
-    function createFlyingCard(product, target) {
+    function getCartShift(product) {
+      const productRect = product.getBoundingClientRect();
+      const laneRect = cartLane.getBoundingClientRect();
+      const groupRect = cartGroup.getBoundingClientRect();
+      const basketRect = cartBasket.getBoundingClientRect();
+      const productCenter = productRect.left + (productRect.width / 2);
+      const basketCenterOffset = (basketRect.left + (basketRect.width / 2)) - groupRect.left;
+      const desiredShift = productCenter - basketCenterOffset - groupRect.left;
+      const minShift = laneRect.left - groupRect.left + 4;
+      const maxShift = laneRect.right - groupRect.right - 4;
+
+      return clamp(desiredShift, minShift, maxShift);
+    }
+
+    function createFlyingCard(product, cartShift) {
       const rect = product.getBoundingClientRect();
       const cartRect = cartBasket.getBoundingClientRect();
-      const cartShift = getCartShift(target);
       const clone = product.cloneNode(true);
       const scale = 0.28;
       const futureCartLeft = cartRect.left + cartShift;
-      const futureCartTop = cartRect.top;
       const targetLeft = futureCartLeft - (cartRect.width * 0.06) - (rect.width * scale * 0.5);
-      const targetTop = futureCartTop - (rect.height * scale * 1.68);
+      const targetTop = cartRect.top - (rect.height * scale * 1.68);
       const translateX = targetLeft - rect.left;
       const translateY = targetTop - rect.top;
 
@@ -796,8 +785,9 @@
         market.classList.remove('is-target-never', 'is-target-whiskas', 'is-target-raid');
         market.classList.add('is-guiding', `is-target-${target}`);
         product.classList.add('selected');
-
-        const flyingCard = createFlyingCard(product, target);
+        const cartShift = getCartShift(product);
+        cartGroup.style.setProperty('--cart-shift-x', `${cartShift}px`);
+        const flyingCard = createFlyingCard(product, cartShift);
         product.classList.add('is-hidden');
 
         window.setTimeout(() => {
