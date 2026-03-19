@@ -5,74 +5,76 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Project Directory</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&display=swap');
+
     :root {
-      --bg: #f4f8f6;
-      --paper: rgba(255, 255, 255, 0.88);
-      --panel: #fbfdfc;
-      --ink: #33413f;
-      --muted: #6d827d;
-      --line: rgba(119, 154, 146, 0.22);
-      --accent: #9bbab4;
-      --accent-deep: #6f948d;
-      --shadow: 0 20px 44px rgba(96, 122, 116, 0.12);
+      --bg: #f7f8f5;
+      --paper: rgba(255, 255, 255, 0.92);
+      --ink: #263331;
+      --muted: #5d716d;
+      --line: rgba(119, 154, 146, 0.18);
+      --accent: #6f948d;
+      --accent-soft: rgba(111, 148, 141, 0.1);
+      --shadow: 0 18px 36px rgba(84, 108, 103, 0.08);
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
       color: var(--ink);
       font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
       background:
-        radial-gradient(circle at top left, rgba(155, 186, 180, 0.22), transparent 30%),
-        radial-gradient(circle at 85% 15%, rgba(191, 214, 208, 0.2), transparent 25%),
-        linear-gradient(180deg, #f7fbf9 0%, #eff5f3 100%);
+        radial-gradient(circle at top left, rgba(155, 186, 180, 0.1), transparent 24%),
+        linear-gradient(180deg, #fafbf9 0%, #f2f5f3 100%);
     }
 
     .page {
-      width: min(1120px, calc(100% - 32px));
-      margin: 24px auto;
-      padding: 22px;
-      border-radius: 28px;
-      border: 1px solid var(--line);
-      background: var(--paper);
-      box-shadow: var(--shadow);
+      width: min(1040px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 24px 0 64px;
     }
 
-    .topbar {
+    .nav {
       display: flex;
       justify-content: space-between;
       align-items: center;
       gap: 16px;
-      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--line);
     }
 
-    .topbar a {
-      color: var(--accent-deep);
+    .brand,
+    .nav a {
+      color: var(--muted);
       text-decoration: none;
+      font-size: 1.08rem;
+    }
+
+    .hero {
+      padding: 54px 0 28px;
     }
 
     h1 {
-      margin: 0 0 10px;
-      font-size: clamp(2.1rem, 5vw, 3.8rem);
+      margin: 0;
+      font-size: clamp(3.2rem, 7vw, 5rem);
       font-weight: 600;
+      line-height: 0.96;
+      letter-spacing: -0.03em;
     }
 
     .lead {
-      margin: 0 0 26px;
-      max-width: 42rem;
+      margin: 16px 0 0;
+      max-width: 38rem;
       color: var(--muted);
-      line-height: 1.9;
-      font-size: 1.08rem;
+      font-size: 1.18rem;
+      line-height: 1.75;
     }
 
     .list {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 22px;
+      gap: 24px;
       align-items: start;
     }
 
@@ -81,16 +83,10 @@
       overflow: hidden;
       border-radius: 26px;
       border: 1px solid var(--line);
-      background: var(--panel);
+      background: var(--paper);
+      box-shadow: var(--shadow);
       color: inherit;
       text-decoration: none;
-      box-shadow: 0 12px 28px rgba(96, 122, 116, 0.08);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .project:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 18px 34px rgba(96, 122, 116, 0.14);
     }
 
     .thumb {
@@ -113,84 +109,88 @@
       left: 16px;
       padding: 10px 12px;
       border-radius: 999px;
-      background: rgba(51, 65, 63, 0.56);
-      backdrop-filter: blur(8px);
+      background: rgba(38, 51, 49, 0.56);
     }
 
     .logo-badge img {
       display: block;
-      width: 86px;
+      width: 88px;
       height: auto;
     }
 
     .content {
-      padding: 18px 18px 20px;
+      padding: 20px;
+    }
+
+    .section-label {
+      display: inline-block;
+      margin-bottom: 10px;
+      color: var(--accent);
+      font-size: 0.94rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
     }
 
     .content strong {
       display: block;
-      margin-bottom: 6px;
-      font-size: 1.38rem;
+      font-size: 1.5rem;
       font-weight: 600;
     }
 
     .content em {
       display: block;
-      margin-bottom: 10px;
-      font-size: 1.02rem;
-      font-style: italic;
-      color: var(--accent-deep);
-      letter-spacing: 0.04em;
+      margin-top: 6px;
+      color: var(--accent);
+      font-style: normal;
+      font-size: 1.05rem;
+      letter-spacing: 0.03em;
     }
 
     .content span {
+      display: block;
+      margin-top: 12px;
       color: var(--muted);
-      line-height: 1.8;
-      font-size: 1.08rem;
+      font-size: 1.12rem;
+      line-height: 1.72;
     }
 
     @media (max-width: 760px) {
-      .list {
-        grid-template-columns: 1fr;
-      }
-
-      .page {
-        padding: 18px;
-      }
+      .page { width: min(1040px, calc(100% - 28px)); }
+      .nav { flex-direction: column; align-items: flex-start; }
+      .list { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
   <main class="page">
-    <div class="topbar">
+    <header class="nav">
+      <a class="brand" href="index.html">Ziyi Ren</a>
       <a href="index.html">Home</a>
-      <span>Project Directory</span>
-    </div>
+    </header>
 
-    <h1>Project Directory</h1>
-    <p class="lead">
-      Featured work is shown here in a visual directory. Each card opens into its own project page, with the image acting as a quick preview of the campaign's tone and theme.
-    </p>
+    <section class="hero">
+      <h1>Project Directory</h1>
+      <p class="lead">
+        A selection of work presented as a simple visual index. Each project card opens into its own dedicated page.
+      </p>
+    </section>
 
     <section class="list">
       <a class="project" href="never-again.html">
         <div class="thumb">
-          <img class="cover" src="src/never%20again/Never%20Again-21grams-ziyi-2%E7%9A%84%E5%89%AF%E6%9C%AC.jpg" alt="Never Again project preview">
+          <img class="cover" src="src/never%20again/Never%20Again-21grams-ziyi-2%E7%9A%84%E5%89%AF%E6%9C%AC.jpg" alt="Never Again preview">
           <div class="logo-badge">
             <img src="src/never%20again/21GRAMS_White.webp" alt="21GRAMS logo">
           </div>
         </div>
         <div class="content">
+          <span class="section-label">Featured Project</span>
           <strong>Never Again</strong>
           <em>A campaign concept for 21GRAMS</em>
-          <span>A vaccine-awareness campaign that uses historical disease imagery, AR touchpoints, and a direct call to action to remind viewers that the past can return.</span>
+          <span>A vaccine-awareness campaign using historical imagery, AR touchpoints, and a direct call to action to show how quickly the past can return.</span>
         </div>
       </a>
     </section>
   </main>
 </body>
 </html>
-
-
-
-

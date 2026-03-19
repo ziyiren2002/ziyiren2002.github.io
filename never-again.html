@@ -3,44 +3,37 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>never again</title>
+  <title>Never Again</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&display=swap');
+
     :root {
-      --bg: #f4f8f6;
-      --paper: rgba(255, 255, 255, 0.84);
-      --panel: #fbfdfc;
-      --ink: #33413f;
-      --muted: #6d827d;
-      --line: rgba(119, 154, 146, 0.22);
-      --accent: #9bbab4;
-      --accent-deep: #6f948d;
-      --shadow: 0 18px 40px rgba(96, 122, 116, 0.12);
+      --bg: #f7f8f5;
+      --paper: rgba(255, 255, 255, 0.92);
+      --panel: #fbfcfa;
+      --ink: #263331;
+      --muted: #5d716d;
+      --line: rgba(119, 154, 146, 0.18);
+      --accent: #6f948d;
+      --accent-soft: rgba(111, 148, 141, 0.1);
+      --shadow: 0 18px 36px rgba(84, 108, 103, 0.08);
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
       color: var(--ink);
       font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
       background:
-        radial-gradient(circle at top left, rgba(155, 186, 180, 0.26), transparent 30%),
-        radial-gradient(circle at 90% 10%, rgba(191, 214, 208, 0.24), transparent 26%),
-        linear-gradient(180deg, #f7fbf9 0%, #eff5f3 100%);
+        radial-gradient(circle at top left, rgba(155, 186, 180, 0.1), transparent 24%),
+        linear-gradient(180deg, #fafbf9 0%, #f2f5f3 100%);
     }
 
     .page {
-      width: min(1180px, calc(100% - 32px));
-      margin: 24px auto;
-      padding: 22px;
-      border: 1px solid var(--line);
-      border-radius: 28px;
-      background: var(--paper);
-      backdrop-filter: blur(16px);
-      box-shadow: var(--shadow);
+      width: min(1080px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 24px 0 64px;
     }
 
     .nav {
@@ -48,74 +41,68 @@
       justify-content: space-between;
       align-items: center;
       gap: 16px;
-      margin-bottom: 28px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 36px;
     }
 
-    .brand {
-      font-size: 1.12rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--accent-deep);
+    .brand,
+    .menu a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 1.08rem;
     }
 
     .menu {
       display: flex;
+      gap: 20px;
       flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .menu a {
-      padding: 10px 16px;
-      border-radius: 999px;
-      border: 1px solid var(--line);
-      color: var(--ink);
-      text-decoration: none;
-      background: rgba(255, 255, 255, 0.55);
-      font-size: 1.1rem;
-    }
-
-    .menu a:hover {
-      background: var(--accent);
-      border-color: transparent;
-      color: #fff;
     }
 
     .intro {
       display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 22px;
-      margin-bottom: 24px;
+      grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+      gap: 24px;
+      margin-bottom: 28px;
+    }
+
+    .card,
+    .meta-block,
+    .figure {
+      border: 1px solid var(--line);
+      border-radius: 26px;
+      background: var(--paper);
+      box-shadow: var(--shadow);
     }
 
     .card {
-      padding: 28px;
-      border-radius: 26px;
-      border: 1px solid var(--line);
-      background: var(--panel);
+      padding: 30px;
     }
 
     .eyebrow {
       display: inline-block;
-      padding: 8px 12px;
+      padding: 7px 12px;
       border-radius: 999px;
-      background: rgba(155, 186, 180, 0.18);
-      color: var(--accent-deep);
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 0.96rem;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      font-size: 1rem;
     }
 
     h1 {
-      margin: 18px 0 12px;
-      font-size: clamp(3rem, 5vw, 5.1rem);
-      line-height: 0.98;
+      margin: 16px 0 10px;
+      font-size: clamp(3.1rem, 6vw, 5rem);
+      line-height: 0.95;
       font-weight: 600;
+      letter-spacing: -0.03em;
     }
 
     p {
+      margin: 0;
       color: var(--muted);
-      line-height: 1.85;
-      font-size: 1.28rem;
+      font-size: 1.22rem;
+      line-height: 1.72;
     }
 
     .meta {
@@ -124,20 +111,23 @@
     }
 
     .meta-block {
-      padding: 18px;
-      border-radius: 20px;
-      background: linear-gradient(180deg, rgba(219, 231, 228, 0.46), rgba(255, 255, 255, 0.75));
-      border: 1px solid var(--line);
-      font-size: 1.22rem;
-      line-height: 1.75;
-      color: var(--muted);
+      padding: 20px;
+      background: var(--panel);
     }
 
     .meta-block strong {
       display: block;
-      margin-bottom: 8px;
-      font-size: 1.28rem;
+      margin-bottom: 6px;
       color: var(--ink);
+      font-size: 1.22rem;
+      font-weight: 600;
+    }
+
+    .meta-block span {
+      display: block;
+      color: var(--muted);
+      font-size: 1.14rem;
+      line-height: 1.68;
     }
 
     .gallery {
@@ -147,50 +137,43 @@
 
     .figure {
       overflow: hidden;
-      border-radius: 26px;
-      border: 1px solid var(--line);
-      background: rgba(255, 255, 255, 0.88);
     }
 
     .figure img {
-      display: block;
       width: 100%;
+      display: block;
       height: auto;
       background: #edf4f1;
     }
 
     .caption {
       padding: 20px 22px 24px;
+      background: var(--paper);
     }
 
     .caption strong {
       display: block;
       margin-bottom: 8px;
-      font-size: 1.32rem;
-      color: var(--ink);
+      font-size: 1.24rem;
+      font-weight: 600;
     }
 
     .caption p {
-      margin: 0;
-      font-size: 1.22rem;
+      font-size: 1.16rem;
+      line-height: 1.7;
     }
 
     @media (max-width: 900px) {
-      .intro {
-        grid-template-columns: 1fr;
-      }
-
-      .nav {
-        flex-direction: column;
-        align-items: flex-start;
-      }
+      .page { width: min(1080px, calc(100% - 28px)); }
+      .nav { flex-direction: column; align-items: flex-start; }
+      .intro { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
   <main class="page">
     <header class="nav">
-      <div class="brand">Portfolio in Celadon</div>
+      <a class="brand" href="index.html">Ziyi Ren</a>
       <nav class="menu" aria-label="Main">
         <a href="index.html">Home</a>
         <a href="projects.html">Project Directory</a>
@@ -202,29 +185,29 @@
         <span class="eyebrow">A Campaign Concept for 21GRAMS</span>
         <h1>Never Again</h1>
         <p>
-          Never Again is a campaign concept developed for 21GRAMS, built around one warning: diseases that feel historical can return the moment we stop trusting the vaccines that pushed them into the past.
+          Never Again is a vaccine-awareness campaign concept built around one warning: diseases that feel historical can return the moment we stop trusting the vaccines that pushed them into the past.
         </p>
       </article>
 
       <aside class="meta">
         <div class="meta-block">
           <strong>We Want To Tell</strong>
-          Young parents and young adults who think vaccine-preventable diseases belong to the past.
+          <span>Young parents and young adults who think vaccine-preventable diseases belong to the past.</span>
         </div>
         <div class="meta-block">
           <strong>That</strong>
-          The only reason these diseases look like history is that vaccines made them so.
+          <span>The only reason these diseases look like history is that vaccines made them so.</span>
         </div>
         <div class="meta-block">
           <strong>Because</strong>
-          The moment we stop believing in vaccines, the past can return.
+          <span>The moment we stop believing in vaccines, the past can return.</span>
         </div>
       </aside>
     </section>
 
     <section class="gallery">
       <figure class="figure">
-        <img src="src/never%20again/Never%20Again-21grams-ziyi-2%E7%9A%84%E5%89%AF%E6%9C%AC.jpg" alt="never again visual 1">
+        <img src="src/never%20again/Never%20Again-21grams-ziyi-2%E7%9A%84%E5%89%AF%E6%9C%AC.jpg" alt="Never Again visual 1">
         <figcaption class="caption">
           <strong>Polio Poster</strong>
           <p>1952, Polio. You call vaccines unnecessary. They would have called them a miracle. Never Again. Protect tomorrow - vaccinate today.</p>
@@ -232,7 +215,7 @@
       </figure>
 
       <figure class="figure">
-        <img src="src/never%20again/Never%20Again-21grams-ziyi-3%E7%9A%84%E5%89%AF%E6%9C%AC.jpg" alt="never again visual 2">
+        <img src="src/never%20again/Never%20Again-21grams-ziyi-3%E7%9A%84%E5%89%AF%E6%9C%AC.jpg" alt="Never Again visual 2">
         <figcaption class="caption">
           <strong>Smallpox Poster</strong>
           <p>1950s, Smallpox. You have the privilege of ignoring vaccines today. They didn't. Never Again. Protect tomorrow - vaccinate today.</p>
@@ -240,7 +223,7 @@
       </figure>
 
       <figure class="figure">
-        <img src="src/never%20again/Never%20Again-21grams-ziyi-4%E7%9A%84%E5%89%AF%E6%9C%AC.jpg" alt="never again visual 3">
+        <img src="src/never%20again/Never%20Again-21grams-ziyi-4%E7%9A%84%E5%89%AF%E6%9C%AC.jpg" alt="Never Again visual 3">
         <figcaption class="caption">
           <strong>Tetanus Poster</strong>
           <p>1940s, Tetanus. You worry about side effects. They lived them. Never Again. Protect tomorrow - vaccinate today.</p>
@@ -248,7 +231,7 @@
       </figure>
 
       <figure class="figure">
-        <img src="src/never%20again/Never%20Again-21grams-ziyi-5%E7%9A%84%E5%89%AF%E6%9C%AC.jpg" alt="never again visual 4">
+        <img src="src/never%20again/Never%20Again-21grams-ziyi-5%E7%9A%84%E5%89%AF%E6%9C%AC.jpg" alt="Never Again visual 4">
         <figcaption class="caption">
           <strong>Rubella Poster</strong>
           <p>1964, Rubella. For you, vaccines are a dinner table debate. For them it was the difference between life and death. Never Again. Protect tomorrow - vaccinate today.</p>
@@ -256,7 +239,7 @@
       </figure>
 
       <figure class="figure">
-        <img src="src/never%20again/Never%20Again-21grams-ziyi-6%E7%9A%84%E5%89%AF%E6%9C%AC.jpg" alt="never again visual 5">
+        <img src="src/never%20again/Never%20Again-21grams-ziyi-6%E7%9A%84%E5%89%AF%E6%9C%AC.jpg" alt="Never Again visual 5">
         <figcaption class="caption">
           <strong>QR Activation Concept</strong>
           <p>Augmented Reality QR Codes. Situ. 1: Swimming pool. Situ. 2: City Street. Situ. 3: School. Before vaccines, it once looked like this. But never again. Scan to see.</p>
@@ -264,7 +247,7 @@
       </figure>
 
       <figure class="figure">
-        <img src="src/never%20again/Never%20Again-21grams-ziyi-7%E7%9A%84%E5%89%AF%E6%9C%AC.jpg" alt="never again visual 6">
+        <img src="src/never%20again/Never%20Again-21grams-ziyi-7%E7%9A%84%E5%89%AF%E6%9C%AC.jpg" alt="Never Again visual 6">
         <figcaption class="caption">
           <strong>AR Experience Mockup</strong>
           <p>AR experience. Situ. 1: Swimming pool. Situ. 2: City Street. Situ. 3: School.</p>
@@ -272,7 +255,7 @@
       </figure>
 
       <figure class="figure">
-        <img src="src/never%20again/Never%20Again-21grams-ziyi-8%E7%9A%84%E5%89%AF%E6%9C%AC.jpg" alt="never again visual 7">
+        <img src="src/never%20again/Never%20Again-21grams-ziyi-8%E7%9A%84%E5%89%AF%E6%9C%AC.jpg" alt="Never Again visual 7">
         <figcaption class="caption">
           <strong>Call to Action</strong>
           <p>CTA. Never again. Protect tomorrow - vaccinate today. Get more information.</p>
@@ -282,4 +265,3 @@
   </main>
 </body>
 </html>
-
