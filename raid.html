@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Never Again</title>
+  <title>RAID</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&display=swap');
 
@@ -17,6 +17,7 @@
       --accent: #6f948d;
       --accent-soft: rgba(111, 148, 141, 0.1);
       --shadow: 0 18px 36px rgba(84, 108, 103, 0.08);
+      --stage: #f4f6f3;
     }
 
     * { box-sizing: border-box; }
@@ -135,18 +136,31 @@
 
     .gallery {
       display: grid;
+      grid-template-columns: 1fr;
       gap: 22px;
+      align-items: start;
     }
 
     .figure {
       overflow: hidden;
     }
 
-    .figure img {
-      width: 100%;
-      display: block;
+    .visual-stage {
+      display: grid;
+      place-items: center;
+      min-height: 420px;
+      padding: 18px;
+      background: var(--stage);
+    }
+
+    .visual-stage img {
+      max-width: 100%;
+      max-height: 520px;
+      width: auto;
       height: auto;
-      background: #edf4f1;
+      display: block;
+      object-fit: contain;
+      border-radius: 18px;
     }
 
     .caption {
@@ -170,6 +184,14 @@
       .page { width: min(1080px, calc(100% - 28px)); }
       .nav { flex-direction: column; align-items: flex-start; }
       .intro { grid-template-columns: 1fr; }
+      .gallery { grid-template-columns: 1fr; }
+      .visual-stage {
+        min-height: 320px;
+        padding: 16px;
+      }
+      .visual-stage img {
+        max-height: 420px;
+      }
     }
 
     @keyframes page-fade-in {
@@ -196,83 +218,57 @@
 
     <section class="intro">
       <article class="card">
-        <span class="eyebrow">A Campaign Concept for 21GRAMS</span>
-        <h1>Never Again</h1>
+        <span class="eyebrow">Advertising Concept</span>
+        <h1>RAID</h1>
         <p>
-          Never Again is a vaccine-awareness campaign concept built around one warning: diseases that feel historical can return the moment we stop trusting the vaccines that pushed them into the past.
+          This RAID concept treats household pest control like a dramatic product intervention, using cinematic scale, tension, and sharp visual contrast to make the brand feel immediate, powerful, and unmistakable.
         </p>
       </article>
 
       <aside class="meta">
         <div class="meta-block">
-          <strong>We Want To Tell</strong>
-          <span>Young parents and young adults who think vaccine-preventable diseases belong to the past.</span>
+          <strong>Direction</strong>
+          <span>A high-impact art direction that turns ordinary kitchen spaces into stylized stages for product power and confrontation.</span>
         </div>
         <div class="meta-block">
-          <strong>That</strong>
-          <span>The only reason these diseases look like history is that vaccines made them so.</span>
+          <strong>Visual Hook</strong>
+          <span>Oversized product presence, swarming insects, and theatrical perspective shifts that make the can feel dominant and decisive.</span>
         </div>
         <div class="meta-block">
-          <strong>Because</strong>
-          <span>The moment we stop believing in vaccines, the past can return.</span>
+          <strong>Tone</strong>
+          <span>Bold, dramatic, and slightly cinematic, with a polished household backdrop that keeps the concept grounded in everyday use.</span>
         </div>
       </aside>
     </section>
 
     <section class="gallery">
       <figure class="figure">
-        <img src="src/never%20again/Never%20Again-21grams-ziyi-2%E7%9A%84%E5%89%AF%E6%9C%AC.jpg" alt="Never Again visual 1">
+        <div class="visual-stage">
+          <img src="src/raid/RAID%203.png" alt="Raid visual 1">
+        </div>
         <figcaption class="caption">
-          <strong>Polio Poster</strong>
-          <p>1952, Polio. You call vaccines unnecessary. They would have called them a miracle. Never Again. Protect tomorrow - vaccinate today.</p>
+          <strong>Hero Product Shot</strong>
+          <p>A striking hero visual that frames the RAID can as the dominant force in the room, using scale and contrast to amplify its authority.</p>
         </figcaption>
       </figure>
 
       <figure class="figure">
-        <img src="src/never%20again/Never%20Again-21grams-ziyi-3%E7%9A%84%E5%89%AF%E6%9C%AC.jpg" alt="Never Again visual 2">
+        <div class="visual-stage">
+          <img src="src/raid/RAID2.png" alt="Raid visual 2">
+        </div>
         <figcaption class="caption">
-          <strong>Smallpox Poster</strong>
-          <p>1950s, Smallpox. You have the privilege of ignoring vaccines today. They didn't. Never Again. Protect tomorrow - vaccinate today.</p>
+          <strong>Kitchen Confrontation</strong>
+          <p>A more stylized scene where the product hangs over the floor like a spotlighted threat, turning pest control into a cinematic moment.</p>
         </figcaption>
       </figure>
 
       <figure class="figure">
-        <img src="src/never%20again/Never%20Again-21grams-ziyi-4%E7%9A%84%E5%89%AF%E6%9C%AC.jpg" alt="Never Again visual 3">
+        <div class="visual-stage">
+          <img src="src/raid/RAID%201.jpeg" alt="Raid visual 3">
+        </div>
         <figcaption class="caption">
-          <strong>Tetanus Poster</strong>
-          <p>1940s, Tetanus. You worry about side effects. They lived them. Never Again. Protect tomorrow - vaccinate today.</p>
-        </figcaption>
-      </figure>
-
-      <figure class="figure">
-        <img src="src/never%20again/Never%20Again-21grams-ziyi-5%E7%9A%84%E5%89%AF%E6%9C%AC.jpg" alt="Never Again visual 4">
-        <figcaption class="caption">
-          <strong>Rubella Poster</strong>
-          <p>1964, Rubella. For you, vaccines are a dinner table debate. For them it was the difference between life and death. Never Again. Protect tomorrow - vaccinate today.</p>
-        </figcaption>
-      </figure>
-
-      <figure class="figure">
-        <img src="src/never%20again/Never%20Again-21grams-ziyi-6%E7%9A%84%E5%89%AF%E6%9C%AC.jpg" alt="Never Again visual 5">
-        <figcaption class="caption">
-          <strong>QR Activation Concept</strong>
-          <p>Augmented Reality QR Codes. Situ. 1: Swimming pool. Situ. 2: City Street. Situ. 3: School. Before vaccines, it once looked like this. But never again. Scan to see.</p>
-        </figcaption>
-      </figure>
-
-      <figure class="figure">
-        <img src="src/never%20again/Never%20Again-21grams-ziyi-7%E7%9A%84%E5%89%AF%E6%9C%AC.jpg" alt="Never Again visual 6">
-        <figcaption class="caption">
-          <strong>AR Experience Mockup</strong>
-          <p>AR experience. Situ. 1: Swimming pool. Situ. 2: City Street. Situ. 3: School.</p>
-        </figcaption>
-      </figure>
-
-      <figure class="figure">
-        <img src="src/never%20again/Never%20Again-21grams-ziyi-8%E7%9A%84%E5%89%AF%E6%9C%AC.jpg" alt="Never Again visual 7">
-        <figcaption class="caption">
-          <strong>Call to Action</strong>
-          <p>CTA. Never again. Protect tomorrow - vaccinate today. Get more information.</p>
+          <strong>Brand Impact Frame</strong>
+          <p>A clean domestic setting paired with a dense swarm visual to underline the central promise of instant intervention and visible control.</p>
         </figcaption>
       </figure>
     </section>

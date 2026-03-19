@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -9,13 +9,17 @@
 
     :root {
       --bg: #f7f8f5;
-      --paper: rgba(255, 255, 255, 0.92);
+      --paper: rgba(255, 255, 255, 0.95);
       --ink: #263331;
       --muted: #5d716d;
       --line: rgba(119, 154, 146, 0.18);
       --accent: #6f948d;
-      --accent-soft: rgba(111, 148, 141, 0.1);
+      --accent-soft: rgba(111, 148, 141, 0.12);
       --shadow: 0 18px 36px rgba(84, 108, 103, 0.08);
+      --shelf: #dfe8e4;
+      --shelf-edge: #b7cbc5;
+      --cream: #f6efe0;
+      --cream-deep: #ead8b7;
     }
 
     * { box-sizing: border-box; }
@@ -27,12 +31,13 @@
       background:
         radial-gradient(circle at top left, rgba(155, 186, 180, 0.1), transparent 24%),
         linear-gradient(180deg, #fafbf9 0%, #f2f5f3 100%);
+      overflow-x: hidden;
     }
 
     .page {
-      width: min(1040px, calc(100% - 40px));
+      width: min(1180px, calc(100% - 40px));
       margin: 0 auto;
-      padding: 24px 0 64px;
+      padding: 24px 0 76px;
     }
 
     .nav {
@@ -52,112 +57,492 @@
     }
 
     .hero {
-      padding: 54px 0 28px;
+      padding: 48px 0 18px;
+      text-align: center;
     }
 
     h1 {
       margin: 0;
-      font-size: clamp(3.2rem, 7vw, 5rem);
+      font-size: clamp(3.2rem, 7vw, 5.2rem);
+      line-height: 0.94;
       font-weight: 600;
-      line-height: 0.96;
       letter-spacing: -0.03em;
     }
 
     .lead {
-      margin: 16px 0 0;
-      max-width: 38rem;
+      margin: 14px auto 0;
+      max-width: 42rem;
       color: var(--muted);
-      font-size: 1.18rem;
-      line-height: 1.75;
+      font-size: 1.16rem;
+      line-height: 1.68;
     }
 
-    .list {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 24px;
-      align-items: start;
-    }
-
-    .project {
-      display: block;
-      overflow: hidden;
-      border-radius: 26px;
+    .market {
+      position: relative;
+      margin-top: 26px;
+      padding: 34px 20px 252px;
       border: 1px solid var(--line);
+      border-radius: 30px;
       background: var(--paper);
       box-shadow: var(--shadow);
-      color: inherit;
-      text-decoration: none;
+      overflow: hidden;
+      isolation: isolate;
     }
 
-    .thumb {
+    .market::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(111, 148, 141, 0.04), transparent 22%),
+        linear-gradient(90deg, rgba(111, 148, 141, 0.035) 1px, transparent 1px);
+      background-size: 100% 100%, 28px 28px;
+      pointer-events: none;
+    }
+
+    .market-note {
+      position: absolute;
+      top: 18px;
+      left: 22px;
+      color: var(--accent);
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transform: rotate(-2deg);
+      z-index: 2;
+    }
+
+    .shelf-row {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
+      padding-top: 30px;
+      align-items: end;
+      z-index: 2;
+    }
+
+    .shelf-row::after {
+      content: "";
+      position: absolute;
+      left: 12px;
+      right: 0;
+      bottom: -16px;
+      height: 14px;
+      border-radius: 12px;
+      background: linear-gradient(180deg, var(--shelf), var(--shelf-edge));
+      box-shadow: 0 8px 18px rgba(90, 118, 111, 0.12);
+    }
+
+    .product {
+      position: relative;
+      display: block;
+      padding: 10px;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.98);
+      color: inherit;
+      text-decoration: none;
+      box-shadow: 0 10px 22px rgba(84, 108, 103, 0.06);
+      transition: transform 0.22s ease, box-shadow 0.22s ease;
+      transform-origin: center bottom;
+    }
+
+    .product:hover {
+      transform: translateY(-5px) rotate(-1deg);
+      box-shadow: 0 16px 24px rgba(84, 108, 103, 0.12);
+    }
+
+    .product.is-hidden {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .product.empty {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .product-top {
       position: relative;
       aspect-ratio: 4 / 3;
       overflow: hidden;
-      background: #dde8e4;
+      border-radius: 15px;
+      background: #e2ebe7;
     }
 
-    .thumb img.cover {
+    .product-top img.cover {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
     }
 
-    .logo-badge {
+    .badge {
       position: absolute;
-      top: 16px;
-      left: 16px;
-      padding: 10px 12px;
+      top: 10px;
+      left: 10px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 54px;
+      min-height: 26px;
+      padding: 5px 7px;
       border-radius: 999px;
       background: rgba(38, 51, 49, 0.56);
+      backdrop-filter: blur(6px);
     }
 
-    .logo-badge img {
-      display: block;
-      width: 88px;
+    .badge img {
+      max-width: 64px;
+      max-height: 14px;
+      width: auto;
       height: auto;
+      display: block;
     }
 
-    .content {
-      padding: 20px;
-    }
-
-    .section-label {
-      display: inline-block;
-      margin-bottom: 10px;
-      color: var(--accent);
-      font-size: 0.94rem;
+    .badge.text-badge {
+      padding: 5px 10px;
+      color: #f7f2d2;
+      font-size: 0.96rem;
+      font-weight: 600;
       letter-spacing: 0.08em;
       text-transform: uppercase;
     }
 
-    .content strong {
-      display: block;
-      font-size: 1.5rem;
-      font-weight: 600;
+    .product-info {
+      padding-top: 8px;
     }
 
-    .content em {
+    .product-type {
+      display: inline-block;
+      color: var(--accent);
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .product-info strong {
       display: block;
       margin-top: 6px;
-      color: var(--accent);
-      font-style: normal;
-      font-size: 1.05rem;
-      letter-spacing: 0.03em;
+      font-size: 1.18rem;
+      font-weight: 600;
+      line-height: 1;
     }
 
-    .content span {
+    .product-info em {
       display: block;
-      margin-top: 12px;
+      margin-top: 4px;
       color: var(--muted);
-      font-size: 1.12rem;
-      line-height: 1.72;
+      font-style: normal;
+      font-size: 0.82rem;
+      letter-spacing: 0.02em;
+      line-height: 1.2;
     }
 
-    @media (max-width: 760px) {
-      .page { width: min(1040px, calc(100% - 28px)); }
+    .product-info span {
+      display: block;
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.48;
+    }
+
+    .product-tag {
+      position: absolute;
+      right: 10px;
+      bottom: 10px;
+      min-width: 16px;
+      min-height: 16px;
+      border-radius: 999px;
+      background: rgba(111, 148, 141, 0.12);
+      color: var(--accent);
+      font-size: 0.82rem;
+      display: grid;
+      place-items: center;
+    }
+
+    .cart-lane {
+      position: absolute;
+      left: 20px;
+      right: 20px;
+      bottom: 32px;
+      height: 184px;
+      z-index: 2;
+    }
+
+    .lane-line {
+      position: absolute;
+      left: 12px;
+      right: 0;
+      bottom: 18px;
+      height: 4px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, rgba(111, 148, 141, 0.12), rgba(111, 148, 141, 0.42), rgba(111, 148, 141, 0.12));
+    }
+
+    .cart-group {
+      position: absolute;
+      left: 6px;
+      bottom: 8px;
+      width: 320px;
+      height: 132px;
+      transition: transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .market.is-target-never .cart-group { transform: translateX(70px); }
+    .market.is-target-whiskas .cart-group { transform: translateX(340px); }
+    .market.is-target-raid .cart-group { transform: translateX(610px); }
+
+    .cart-guide-note {
+      position: absolute;
+      left: 12px;
+      bottom: 150px;
+      color: var(--muted);
+      font-size: 0.96rem;
+      transform: rotate(-4deg);
+      opacity: 0.9;
+      transition: opacity 0.25s ease;
+    }
+
+    .market.is-guiding .cart-guide-note {
+      opacity: 0;
+    }
+
+    .doodle-person,
+    .doodle-cart {
+      position: absolute;
+      bottom: 8px;
+      color: var(--accent);
+    }
+
+    .doodle-person svg,
+    .doodle-cart svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+      overflow: visible;
+      stroke: currentColor;
+      stroke-width: 2.6;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .doodle-person {
+      width: 94px;
+      height: 116px;
+    }
+
+    .doodle-person.one { left: 6px; }
+    .doodle-person.two { left: 82px; }
+
+    .doodle-person .body {
+      animation: bob 3.1s ease-in-out infinite;
+      transform-origin: center bottom;
+    }
+
+    .doodle-person.two .body { animation-delay: 0.35s; }
+
+    .doodle-person .arm-a,
+    .doodle-person .arm-b,
+    .doodle-person .leg-a,
+    .doodle-person .leg-b {
+      transform-box: fill-box;
+      transform-origin: center top;
+    }
+
+    .doodle-person.one .head-tilt { transform: rotate(-4deg); transform-origin: center center; }
+    .doodle-person.two .head-tilt { transform: rotate(3deg); transform-origin: center center; }
+
+    .market.is-guiding .doodle-person .body {
+      animation: push-bob 0.55s ease-in-out infinite;
+    }
+
+    .market.is-guiding .doodle-person.one .arm-a,
+    .market.is-guiding .doodle-person.one .leg-b,
+    .market.is-guiding .doodle-person.two .arm-a,
+    .market.is-guiding .doodle-person.two .leg-b {
+      animation: walk-forward 0.55s ease-in-out infinite;
+    }
+
+    .market.is-guiding .doodle-person.one .arm-b,
+    .market.is-guiding .doodle-person.one .leg-a,
+    .market.is-guiding .doodle-person.two .arm-b,
+    .market.is-guiding .doodle-person.two .leg-a {
+      animation: walk-backward 0.55s ease-in-out infinite;
+    }
+
+    .doodle-cart {
+      width: 174px;
+      height: 104px;
+      left: 160px;
+      bottom: 10px;
+    }
+
+    .market.is-guiding .doodle-cart {
+      animation: cart-jitter 0.55s ease-in-out infinite;
+    }
+
+    .pickup-note {
+      position: absolute;
+      right: 18px;
+      bottom: 138px;
+      color: var(--accent);
+      font-size: 0.96rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transform: rotate(3deg);
+      opacity: 0;
+      transition: opacity 0.35s ease 0.4s, transform 0.35s ease 0.4s;
+    }
+
+    .market.is-guiding .pickup-note {
+      opacity: 1;
+      transform: rotate(0deg);
+    }
+
+    .pickup-stars {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 3;
+    }
+
+    .pickup-stars span {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: rgba(111, 148, 141, 0.24);
+      opacity: 0;
+      transform: scale(0.4);
+    }
+
+    .market.is-target-never .pickup-stars span:nth-child(1) { left: 178px; top: 98px; }
+    .market.is-target-never .pickup-stars span:nth-child(2) { left: 240px; top: 134px; }
+    .market.is-target-never .pickup-stars span:nth-child(3) { left: 286px; top: 92px; }
+
+    .market.is-target-whiskas .pickup-stars span:nth-child(1) { left: 460px; top: 98px; }
+    .market.is-target-whiskas .pickup-stars span:nth-child(2) { left: 520px; top: 134px; }
+    .market.is-target-whiskas .pickup-stars span:nth-child(3) { left: 566px; top: 92px; }
+
+    .market.is-target-raid .pickup-stars span:nth-child(1) { left: 742px; top: 98px; }
+    .market.is-target-raid .pickup-stars span:nth-child(2) { left: 802px; top: 134px; }
+    .market.is-target-raid .pickup-stars span:nth-child(3) { left: 848px; top: 92px; }
+
+    .market.is-guiding .pickup-stars span {
+      animation: pop 0.8s ease forwards;
+    }
+
+    .market.is-guiding .pickup-stars span:nth-child(2) { animation-delay: 0.1s; }
+    .market.is-guiding .pickup-stars span:nth-child(3) { animation-delay: 0.2s; }
+
+    .flying-card {
+      position: fixed;
+      z-index: 20;
+      margin: 0;
+      pointer-events: none;
+      opacity: 1;
+      transform-origin: center center;
+      transition:
+        transform 0.72s cubic-bezier(0.2, 1, 0.35, 1),
+        opacity 0.16s ease,
+        border-radius 0.58s ease,
+        box-shadow 0.58s ease;
+      box-shadow: 0 18px 30px rgba(84, 108, 103, 0.18);
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.98);
+    }
+
+    .flying-card .product-top {
+      border-radius: 15px 15px 0 0;
+    }
+
+    .flying-card .product-info {
+      background: rgba(255, 255, 255, 0.98);
+    }
+
+    body.is-transitioning .page {
+      opacity: 0;
+      transition: opacity 0.45s ease;
+    }
+
+    @keyframes bob {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-4px) rotate(2deg); }
+    }
+
+    @keyframes push-bob {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-5px) rotate(3deg); }
+    }
+
+    @keyframes walk-forward {
+      0%, 100% { transform: rotate(10deg) translateY(0); }
+      50% { transform: rotate(-12deg) translateY(-1px); }
+    }
+
+    @keyframes walk-backward {
+      0%, 100% { transform: rotate(-9deg) translateY(0); }
+      50% { transform: rotate(12deg) translateY(-1px); }
+    }
+
+    @keyframes cart-jitter {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-2px) rotate(-1deg); }
+    }
+
+    @keyframes picked {
+      0% { transform: translateY(0) scale(1); }
+      35% { transform: translateY(-14px) rotate(-2deg) scale(1.03); }
+      100% { transform: translateY(-10px) rotate(-1deg) scale(1.01); }
+    }
+
+    @keyframes pop {
+      0% { opacity: 0; transform: scale(0.4); }
+      40% { opacity: 0.95; transform: scale(1.15); }
+      100% { opacity: 0; transform: scale(0.85); }
+    }
+
+    @media (max-width: 900px) {
+      .page { width: min(1180px, calc(100% - 28px)); }
+      .shelf-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .market { padding-bottom: 228px; }
+      .market.is-target-never .cart-group { transform: translateX(34px); }
+      .market.is-target-whiskas .cart-group { transform: translateX(270px); }
+      .market.is-target-raid .cart-group { transform: translateX(34px); }
+      .market.is-target-never .pickup-stars span:nth-child(1) { left: 160px; top: 104px; }
+      .market.is-target-never .pickup-stars span:nth-child(2) { left: 214px; top: 140px; }
+      .market.is-target-never .pickup-stars span:nth-child(3) { left: 256px; top: 98px; }
+      .market.is-target-whiskas .pickup-stars span:nth-child(1) { left: 448px; top: 104px; }
+      .market.is-target-whiskas .pickup-stars span:nth-child(2) { left: 502px; top: 140px; }
+      .market.is-target-whiskas .pickup-stars span:nth-child(3) { left: 544px; top: 98px; }
+      .market.is-target-raid .pickup-stars span:nth-child(1) { left: 160px; top: 276px; }
+      .market.is-target-raid .pickup-stars span:nth-child(2) { left: 214px; top: 312px; }
+      .market.is-target-raid .pickup-stars span:nth-child(3) { left: 256px; top: 270px; }
+    }
+
+    @media (max-width: 640px) {
+      .page { width: min(1180px, calc(100% - 20px)); }
       .nav { flex-direction: column; align-items: flex-start; }
-      .list { grid-template-columns: 1fr; }
+      .shelf-row { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+      .market { padding: 30px 14px 206px; }
+      .product { padding: 9px; }
+      .product-info strong { font-size: 1.06rem; }
+      .product-info em { font-size: 0.84rem; }
+      .product-info span { font-size: 0.86rem; }
+      .cart-lane { left: 10px; right: 10px; }
+      .cart-group { transform: scale(0.8); transform-origin: left bottom; }
+      .market.is-target-never .cart-group { transform: translateX(0) scale(0.8); }
+      .market.is-target-whiskas .cart-group { transform: translateX(138px) scale(0.8); }
+      .market.is-target-raid .cart-group { transform: translateX(0) scale(0.8); }
+      .pickup-note { right: 10px; bottom: 126px; font-size: 0.84rem; }
+      .market.is-target-never .pickup-stars span:nth-child(1),
+      .market.is-target-whiskas .pickup-stars span:nth-child(1) { top: 92px; }
+      .market.is-target-raid .pickup-stars span:nth-child(1) { left: 154px; top: 252px; }
+      .market.is-target-raid .pickup-stars span:nth-child(2) { left: 206px; top: 286px; }
+      .market.is-target-raid .pickup-stars span:nth-child(3) { left: 246px; top: 246px; }
     }
   </style>
 </head>
@@ -171,41 +556,269 @@
     <section class="hero">
       <h1>Project Directory</h1>
       <p class="lead">
-        A selection of work presented as a simple visual index. Each project card opens into its own dedicated page.
+        Two little shoppers move through the aisle. Each project sits on the shelf like a product. Pick one, let them roll over, grab it, and open the work.
       </p>
     </section>
 
-    <section class="list">
-      <a class="project" href="never-again.html">
-        <div class="thumb">
-          <img class="cover" src="src/never%20again/Never%20Again-21grams-ziyi-2%E7%9A%84%E5%89%AF%E6%9C%AC.jpg" alt="Never Again preview">
-          <div class="logo-badge">
-            <img src="src/never%20again/21GRAMS_White.webp" alt="21GRAMS logo">
-          </div>
-        </div>
-        <div class="content">
-          <span class="section-label">Featured Project</span>
-          <strong>Never Again</strong>
-          <em>A campaign concept for 21GRAMS</em>
-          <span>A vaccine-awareness campaign using historical imagery, AR touchpoints, and a direct call to action to show how quickly the past can return.</span>
-        </div>
-      </a>
+    <section class="market" id="market">
+      <div class="market-note">pick from the shelf</div>
+      <div class="pickup-stars"><span></span><span></span><span></span></div>
 
-      <a class="project" href="whiskas.html">
-        <div class="thumb">
-          <img class="cover" src="src/whiskas/whiskas1.png" alt="Whiskas project preview">
-          <div class="logo-badge">
-            <img src="src/whiskas/logo_2_1.png" alt="Whiskas logo">
+      <div class="shelf-row">
+        <a class="product" href="never-again.html" data-target="never">
+          <div class="product-top">
+            <img class="cover" src="src/never%20again/Never%20Again-21grams-ziyi-2%E7%9A%84%E5%89%AF%E6%9C%AC.jpg" alt="Never Again preview">
+            <div class="badge">
+              <img src="src/never%20again/21GRAMS_White.webp" alt="21GRAMS logo">
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-type">Featured Project</span>
+            <strong>Never Again</strong>
+            <em>A campaign concept for 21GRAMS</em>
+            <span>A vaccine-awareness campaign using historical imagery, AR touchpoints, and a direct call to action to show how quickly the past can return.</span>
+          </div>
+          <div class="product-tag">1</div>
+        </a>
+
+        <a class="product" href="whiskas.html" data-target="whiskas">
+          <div class="product-top">
+            <img class="cover" src="src/whiskas/whiskas1.png" alt="Whiskas preview">
+            <div class="badge">
+              <img src="src/whiskas/logo_2_1.png" alt="Whiskas logo">
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-type">Brand Campaign</span>
+            <strong>Whiskas</strong>
+            <em>A playful social-first campaign</em>
+            <span>A character-driven Whiskas concept that turns everyday cat behavior into humorous, energetic lifestyle content across key visuals and social story mockups.</span>
+          </div>
+          <div class="product-tag">2</div>
+        </a>
+
+        <a class="product" href="raid.html" data-target="raid">
+          <div class="product-top">
+            <img class="cover" src="src/raid/RAID%203.png" alt="Raid preview">
+            <div class="badge text-badge">Raid</div>
+          </div>
+          <div class="product-info">
+            <span class="product-type">Advertising Concept</span>
+            <strong>RAID</strong>
+            <em>A dramatic household-defense visual concept</em>
+            <span>A bold campaign direction that turns everyday pest control into cinematic product storytelling, using scale, tension, and clean domestic settings.</span>
+          </div>
+          <div class="product-tag">3</div>
+        </a>
+
+        <div class="product empty"></div>
+      </div>
+
+      <div class="cart-lane" aria-hidden="true">
+        <div class="pickup-note">taking it off the shelf</div>
+        <div class="cart-guide-note">tap a product to shop the aisle</div>
+        <div class="lane-line"></div>
+        <div class="cart-group" id="cartGroup">
+          <div class="doodle-person one">
+            <svg viewBox="0 0 96 122" role="presentation">
+              <g class="body">
+                <g class="head-tilt">
+                  <circle cx="48" cy="15" r="9"></circle>
+                  <circle cx="45" cy="14" r="0.8"></circle>
+                  <circle cx="51" cy="14" r="0.8"></circle>
+                  <path d="M45 18 C47 20 49 20 51 18"></path>
+                </g>
+                <path d="M35 37 C39 31 44 28 48 28 C53 28 58 31 61 37"></path>
+                <path d="M35 38 C31 47 30 58 33 71 C35 80 40 85 46 86"></path>
+                <path d="M61 38 C65 47 66 58 63 71 C61 80 56 85 50 86"></path>
+                <path d="M46 86 C45 95 43 103 41 112"></path>
+                <path d="M50 86 C54 95 56 103 57 112"></path>
+                <g class="arm-a">
+                  <path d="M35 42 C26 48 20 56 18 64"></path>
+                  <ellipse cx="16" cy="67" rx="5" ry="4"></ellipse>
+                </g>
+                <g class="arm-b">
+                  <path d="M61 43 C68 48 73 55 75 63"></path>
+                  <ellipse cx="77" cy="66" rx="5" ry="4"></ellipse>
+                </g>
+                <g class="leg-a">
+                  <path d="M44 86 C41 94 39 102 39 111"></path>
+                  <ellipse cx="38" cy="114" rx="6" ry="3.5"></ellipse>
+                </g>
+                <g class="leg-b">
+                  <path d="M52 86 C55 94 57 102 58 111"></path>
+                  <ellipse cx="59" cy="114" rx="6" ry="3.5"></ellipse>
+                </g>
+              </g>
+            </svg>
+          </div>
+          <div class="doodle-person two">
+            <svg viewBox="0 0 96 122" role="presentation">
+              <g class="body">
+                <g class="head-tilt">
+                  <circle cx="48" cy="15" r="9"></circle>
+                  <circle cx="45" cy="14" r="0.8"></circle>
+                  <circle cx="51" cy="14" r="0.8"></circle>
+                  <path d="M45 18 C47 19 49 19 51 18"></path>
+                </g>
+                <path d="M37 37 C40 31 44 28 48 28 C53 28 57 31 60 37"></path>
+                <path d="M37 38 C35 48 35 58 37 70 C39 79 43 84 47 86"></path>
+                <path d="M60 38 C62 48 62 58 60 70 C58 79 54 84 50 86"></path>
+                <path d="M47 86 C46 95 46 103 47 112"></path>
+                <path d="M50 86 C52 95 54 103 54 112"></path>
+                <g class="arm-a">
+                  <path d="M37 44 C31 50 27 57 26 65"></path>
+                  <ellipse cx="25" cy="68" rx="5" ry="4"></ellipse>
+                </g>
+                <g class="arm-b">
+                  <path d="M60 43 C69 48 74 56 76 65"></path>
+                  <ellipse cx="77" cy="68" rx="5" ry="4"></ellipse>
+                </g>
+                <g class="leg-a">
+                  <path d="M46 86 C44 94 44 103 45 112"></path>
+                  <ellipse cx="45" cy="115" rx="6" ry="3.5"></ellipse>
+                </g>
+                <g class="leg-b">
+                  <path d="M52 86 C54 94 55 103 55 112"></path>
+                  <ellipse cx="56" cy="115" rx="6" ry="3.5"></ellipse>
+                </g>
+              </g>
+            </svg>
+          </div>
+          <div class="doodle-cart" id="cartBasket">
+            <svg viewBox="0 0 130 84" role="presentation">
+              <path d="M12 14 H26 L38 54 H104"></path>
+              <path d="M34 24 H112 L102 54 H42"></path>
+              <path d="M52 54 L44 70"></path>
+              <path d="M90 54 L82 70"></path>
+              <circle cx="44" cy="72" r="6"></circle>
+              <circle cx="82" cy="72" r="6"></circle>
+              <path d="M52 30 L94 30"></path>
+              <path d="M56 38 L92 38"></path>
+              <path d="M60 46 L88 46"></path>
+            </svg>
           </div>
         </div>
-        <div class="content">
-          <span class="section-label">Brand Campaign</span>
-          <strong>Whiskas</strong>
-          <em>A playful social-first campaign</em>
-          <span>A character-driven Whiskas concept that turns everyday cat behavior into humorous, energetic lifestyle content across key visuals and social story mockups.</span>
-        </div>
-      </a>
+      </div>
     </section>
   </main>
+
+  <script>
+    const market = document.getElementById('market');
+    const products = document.querySelectorAll('.product[data-target]');
+    const cartBasket = document.getElementById('cartBasket');
+    let navigating = false;
+
+    function getCartShift(target) {
+      if (window.innerWidth <= 640) {
+        if (target === 'whiskas') {
+          return 138;
+        }
+
+        return 0;
+      }
+
+      if (window.innerWidth <= 900) {
+        if (target === 'whiskas') {
+          return 270;
+        }
+
+        return 34;
+      }
+
+      if (target === 'raid') {
+        return 610;
+      }
+
+      return target === 'whiskas' ? 340 : 70;
+    }
+
+    function createFlyingCard(product, target) {
+      const rect = product.getBoundingClientRect();
+      const cartRect = cartBasket.getBoundingClientRect();
+      const cartShift = getCartShift(target);
+      const clone = product.cloneNode(true);
+      const scale = 0.28;
+      const futureCartLeft = cartRect.left + cartShift;
+      const futureCartTop = cartRect.top;
+      const targetLeft = futureCartLeft - (cartRect.width * 0.06) - (rect.width * scale * 0.5);
+      const targetTop = futureCartTop - (rect.height * scale * 1.68);
+      const translateX = targetLeft - rect.left;
+      const translateY = targetTop - rect.top;
+
+      clone.classList.remove('selected', 'is-hidden');
+      clone.classList.add('flying-card');
+      clone.removeAttribute('href');
+      clone.style.left = rect.left + 'px';
+      clone.style.top = rect.top + 'px';
+      clone.style.width = rect.width + 'px';
+      clone.style.height = rect.height + 'px';
+      document.body.appendChild(clone);
+
+      requestAnimationFrame(() => {
+        clone.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale}) rotate(-8deg)`;
+      });
+
+      return clone;
+    }
+
+    function fadeToPage(card, href) {
+      document.body.classList.add('is-transitioning');
+      card.style.transition = 'opacity 0.32s ease';
+      card.style.opacity = '0';
+
+      window.setTimeout(() => {
+        window.location.href = href;
+      }, 360);
+    }
+
+    products.forEach((product) => {
+      product.addEventListener('click', (event) => {
+        if (navigating) {
+          event.preventDefault();
+          return;
+        }
+
+        event.preventDefault();
+        navigating = true;
+
+        const target = product.dataset.target;
+        market.classList.remove('is-target-never', 'is-target-whiskas', 'is-target-raid');
+        market.classList.add('is-guiding', `is-target-${target}`);
+        product.classList.add('selected');
+
+        const flyingCard = createFlyingCard(product, target);
+        product.classList.add('is-hidden');
+
+        window.setTimeout(() => {
+          fadeToPage(flyingCard, product.href);
+        }, 720);
+      });
+    });
+  </script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
