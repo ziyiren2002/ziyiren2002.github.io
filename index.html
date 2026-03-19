@@ -69,8 +69,8 @@
     }
 
     .hero-inner {
-      width: min(720px, 100%);
-      padding: 48px 28px;
+      width: min(760px, 100%);
+      padding: 48px 28px 28px;
       border: 1px solid var(--line);
       border-radius: 30px;
       background: var(--paper);
@@ -105,20 +105,216 @@
       line-height: 1.75;
     }
 
+    .button-wrap {
+      position: relative;
+      display: inline-grid;
+      place-items: center;
+      margin-top: 30px;
+    }
+
     .button {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      margin-top: 30px;
       min-width: 280px;
       padding: 18px 30px;
+      border: 0;
       border-radius: 999px;
       background: var(--accent);
       color: #fff;
       text-decoration: none;
+      font-family: inherit;
       font-size: 1.08rem;
       letter-spacing: 0.04em;
+      cursor: pointer;
+      transition: transform 0.24s ease, box-shadow 0.24s ease, background 0.24s ease;
+      box-shadow: 0 10px 22px rgba(111, 148, 141, 0.18);
     }
+
+    .button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 26px rgba(111, 148, 141, 0.2);
+    }
+
+    .button-wrap.is-guiding .button {
+      background: #5d867e;
+      transform: translateY(-1px) scale(0.985);
+    }
+
+    .guide-scene {
+      position: relative;
+      width: min(620px, 100%);
+      height: 176px;
+      margin: 18px auto 0;
+      overflow: hidden;
+    }
+
+    .float-note {
+      position: absolute;
+      left: 16px;
+      top: 10px;
+      color: var(--muted);
+      font-size: 1rem;
+      letter-spacing: 0.02em;
+      transform: rotate(-4deg);
+      opacity: 0.88;
+    }
+
+    .figure {
+      position: absolute;
+      bottom: 0;
+      width: 102px;
+      height: 144px;
+      color: var(--accent);
+    }
+
+    .figure svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+      overflow: visible;
+      stroke: currentColor;
+      stroke-width: 2.9;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .figure-left {
+      left: 32px;
+      transition: transform 1s cubic-bezier(0.2, 1, 0.35, 1);
+    }
+
+    .figure-left .body {
+      animation: doodle-bob 3s ease-in-out infinite;
+      transform-origin: center bottom;
+    }
+
+    .figure-left .leg-a,
+    .figure-left .leg-b {
+      animation: run-legs 0.55s linear infinite paused;
+      transform-origin: 56px 86px;
+    }
+
+    .figure-left .arm-a,
+    .figure-left .arm-b {
+      animation: run-arms 0.55s linear infinite paused;
+      transform-origin: 56px 56px;
+    }
+
+    .figure-right {
+      right: 36px;
+      transform: scaleX(-1) rotate(-2deg);
+    }
+
+    .figure-right .body {
+      animation: doodle-bob 3.4s ease-in-out infinite 0.3s;
+      transform-origin: center bottom;
+    }
+
+    .figure-right .wave-arm {
+      transform-origin: 56px 56px;
+      animation: wave 1.4s ease-in-out infinite;
+    }
+
+    .button-wrap.is-guiding + .guide-scene .figure-left {
+      transform: translateX(250px) rotate(-6deg);
+    }
+
+    .button-wrap.is-guiding + .guide-scene .figure-left .leg-a,
+    .button-wrap.is-guiding + .guide-scene .figure-left .leg-b,
+    .button-wrap.is-guiding + .guide-scene .figure-left .arm-a,
+    .button-wrap.is-guiding + .guide-scene .figure-left .arm-b {
+      animation-play-state: running;
+    }
+
+    .footprints {
+      position: absolute;
+      left: 110px;
+      bottom: 12px;
+      width: 238px;
+      height: 44px;
+      pointer-events: none;
+    }
+
+    .footprints span {
+      position: absolute;
+      width: 12px;
+      height: 6px;
+      border-radius: 999px;
+      border: 2px solid rgba(111, 148, 141, 0.72);
+      border-top-color: transparent;
+      border-left-color: transparent;
+      opacity: 0;
+      transform: rotate(30deg) scale(0.6);
+    }
+
+    .footprints span:nth-child(1) { left: 0; bottom: 4px; }
+    .footprints span:nth-child(2) { left: 28px; bottom: 10px; transform: rotate(-18deg) scale(0.6); }
+    .footprints span:nth-child(3) { left: 64px; bottom: 2px; }
+    .footprints span:nth-child(4) { left: 98px; bottom: 9px; transform: rotate(-18deg) scale(0.6); }
+    .footprints span:nth-child(5) { left: 136px; bottom: 3px; }
+    .footprints span:nth-child(6) { left: 174px; bottom: 11px; transform: rotate(-18deg) scale(0.6); }
+    .footprints span:nth-child(7) { left: 208px; bottom: 5px; }
+
+    .button-wrap.is-guiding + .guide-scene .footprints span {
+      animation: footprint-pop 0.5s ease forwards;
+    }
+
+    .button-wrap.is-guiding + .guide-scene .footprints span:nth-child(2) { animation-delay: 0.08s; }
+    .button-wrap.is-guiding + .guide-scene .footprints span:nth-child(3) { animation-delay: 0.16s; }
+    .button-wrap.is-guiding + .guide-scene .footprints span:nth-child(4) { animation-delay: 0.24s; }
+    .button-wrap.is-guiding + .guide-scene .footprints span:nth-child(5) { animation-delay: 0.32s; }
+    .button-wrap.is-guiding + .guide-scene .footprints span:nth-child(6) { animation-delay: 0.4s; }
+    .button-wrap.is-guiding + .guide-scene .footprints span:nth-child(7) { animation-delay: 0.48s; }
+
+    .arrival-note {
+      position: absolute;
+      right: -6px;
+      top: 22px;
+      color: var(--accent);
+      font-size: 1rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      opacity: 0;
+      transform: translateY(8px) rotate(2deg);
+      transition: opacity 0.3s ease 0.45s, transform 0.3s ease 0.45s;
+    }
+
+    .button-wrap.is-guiding + .guide-scene .arrival-note {
+      opacity: 1;
+      transform: translateY(0) rotate(0deg);
+    }
+
+    .sparkles {
+      position: absolute;
+      right: 86px;
+      top: 30px;
+      width: 64px;
+      height: 64px;
+      pointer-events: none;
+    }
+
+    .sparkles span {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: rgba(111, 148, 141, 0.24);
+      opacity: 0;
+      transform: scale(0.4);
+    }
+
+    .sparkles span:nth-child(1) { left: 8px; top: 8px; }
+    .sparkles span:nth-child(2) { right: 12px; top: 18px; }
+    .sparkles span:nth-child(3) { left: 20px; bottom: 10px; }
+
+    .button-wrap.is-guiding + .guide-scene .sparkles span {
+      animation: pop 0.9s ease forwards;
+    }
+
+    .button-wrap.is-guiding + .guide-scene .sparkles span:nth-child(2) { animation-delay: 0.12s; }
+    .button-wrap.is-guiding + .guide-scene .sparkles span:nth-child(3) { animation-delay: 0.22s; }
 
     .cv {
       width: min(760px, 100%);
@@ -165,6 +361,38 @@
       white-space: nowrap;
     }
 
+    @keyframes doodle-bob {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-5px) rotate(2deg); }
+    }
+
+    @keyframes run-legs {
+      0%, 100% { transform: rotate(14deg); }
+      50% { transform: rotate(-14deg); }
+    }
+
+    @keyframes run-arms {
+      0%, 100% { transform: rotate(-16deg); }
+      50% { transform: rotate(16deg); }
+    }
+
+    @keyframes wave {
+      0%, 100% { transform: rotate(10deg); }
+      50% { transform: rotate(38deg); }
+    }
+
+    @keyframes pop {
+      0% { opacity: 0; transform: scale(0.4); }
+      40% { opacity: 0.95; transform: scale(1.15); }
+      100% { opacity: 0; transform: scale(0.85); }
+    }
+
+    @keyframes footprint-pop {
+      0% { opacity: 0; transform: scale(0.5) rotate(24deg); }
+      35% { opacity: 0.85; transform: scale(1) rotate(24deg); }
+      100% { opacity: 0.55; transform: scale(1) rotate(24deg); }
+    }
+
     @media (max-width: 720px) {
       .page {
         width: min(1040px, calc(100% - 28px));
@@ -176,7 +404,49 @@
       }
 
       .hero-inner {
-        padding: 36px 20px;
+        padding: 36px 20px 24px;
+      }
+
+      .guide-scene {
+        height: 154px;
+      }
+
+      .figure {
+        width: 78px;
+        height: 116px;
+      }
+
+      .figure-left {
+        left: 10px;
+      }
+
+      .figure-right {
+        right: 12px;
+      }
+
+      .button-wrap.is-guiding + .guide-scene .figure-left {
+        transform: translateX(136px) rotate(-6deg);
+      }
+
+      .footprints {
+        left: 68px;
+        width: 138px;
+      }
+
+      .footprints span:nth-child(5),
+      .footprints span:nth-child(6),
+      .footprints span:nth-child(7) {
+        display: none;
+      }
+
+      .arrival-note {
+        right: -4px;
+        top: 20px;
+        font-size: 0.92rem;
+      }
+
+      .sparkles {
+        right: 58px;
       }
 
       .cv-item {
@@ -202,7 +472,49 @@
         <p class="intro">
           This is my portfolio, a place for visual work, campaign thinking, and selected projects presented with clarity and restraint.
         </p>
-        <a class="button" href="projects.html">Enter Project Directory</a>
+        <div class="button-wrap" id="buttonWrap">
+          <button class="button" id="directoryButton" type="button">Enter Project Directory</button>
+        </div>
+        <div class="guide-scene" aria-hidden="true">
+          <span class="float-note">tap and follow</span>
+
+          <div class="figure figure-left">
+            <svg viewBox="0 0 110 150" role="presentation">
+              <g class="body">
+                <circle cx="56" cy="22" r="11"></circle>
+                <path d="M56 34 C53 49 54 62 57 76"></path>
+                <path class="arm-a" d="M56 46 C43 52 35 60 31 69"></path>
+                <path class="arm-b" d="M57 47 C69 50 79 57 84 67"></path>
+                <path class="leg-a" d="M56 76 C48 89 44 102 41 116"></path>
+                <path class="leg-b" d="M57 76 C66 88 73 101 78 116"></path>
+                <path d="M20 16 C24 14 28 15 30 19"></path>
+                <path d="M86 11 C91 12 94 16 93 20"></path>
+              </g>
+            </svg>
+          </div>
+
+          <div class="footprints">
+            <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+          </div>
+
+          <div class="arrival-note">come this way</div>
+          <div class="sparkles"><span></span><span></span><span></span></div>
+
+          <div class="figure figure-right">
+            <svg viewBox="0 0 110 150" role="presentation">
+              <g class="body">
+                <circle cx="56" cy="22" r="11"></circle>
+                <path d="M56 34 C53 49 54 62 57 76"></path>
+                <path d="M56 48 C44 54 37 61 34 69"></path>
+                <path class="wave-arm" d="M57 46 C73 40 86 33 90 19"></path>
+                <path d="M56 76 C48 89 44 102 41 116"></path>
+                <path d="M57 76 C66 88 73 101 78 116"></path>
+                <path d="M20 16 C24 14 28 15 30 19"></path>
+                <path d="M86 11 C91 12 94 16 93 20"></path>
+              </g>
+            </svg>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -250,5 +562,24 @@
       </article>
     </section>
   </main>
+
+  <script>
+    const button = document.getElementById('directoryButton');
+    const wrap = document.getElementById('buttonWrap');
+    let navigating = false;
+
+    button.addEventListener('click', () => {
+      if (navigating) return;
+      navigating = true;
+      wrap.classList.add('is-guiding');
+      button.textContent = 'Follow the little guide...';
+
+      window.setTimeout(() => {
+        window.location.href = 'projects.html';
+      }, 1100);
+    });
+  </script>
 </body>
 </html>
+
+
