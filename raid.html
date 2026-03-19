@@ -73,14 +73,14 @@
     .card,
     .meta-block,
     .figure {
-      border: 1px solid var(--line);
-      border-radius: 26px;
-      background: var(--paper);
-      box-shadow: var(--shadow);
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+      box-shadow: none;
     }
 
     .card {
-      padding: 30px;
+      padding: 0;
     }
 
     .eyebrow {
@@ -115,8 +115,8 @@
     }
 
     .meta-block {
-      padding: 20px;
-      background: var(--panel);
+      padding: 0;
+      background: transparent;
     }
 
     .meta-block strong {
@@ -142,15 +142,15 @@
     }
 
     .figure {
-      overflow: hidden;
+      overflow: visible;
     }
 
     .visual-stage {
       display: grid;
       place-items: center;
-      min-height: 420px;
-      padding: 18px;
-      background: var(--stage);
+      min-height: 0;
+      padding: 0;
+      background: transparent;
     }
 
     .visual-stage img {
@@ -160,12 +160,12 @@
       height: auto;
       display: block;
       object-fit: contain;
-      border-radius: 18px;
+      border-radius: 0;
     }
 
     .caption {
-      padding: 20px 22px 24px;
-      background: var(--paper);
+      padding: 16px 0 8px;
+      background: transparent;
     }
 
     .caption strong {
@@ -186,8 +186,8 @@
       .intro { grid-template-columns: 1fr; }
       .gallery { grid-template-columns: 1fr; }
       .visual-stage {
-        min-height: 320px;
-        padding: 16px;
+        min-height: 0;
+        padding: 0;
       }
       .visual-stage img {
         max-height: 420px;
