@@ -174,6 +174,23 @@
       display: block;
     }
 
+    .cover-copy {
+      width: 100%;
+      height: 100%;
+      display: grid;
+      place-items: center;
+      padding: 16px;
+      color: var(--ink);
+      font-size: 1.42rem;
+      line-height: 1.05;
+      letter-spacing: 0.06em;
+      text-align: center;
+      text-transform: uppercase;
+      background:
+        radial-gradient(circle at top, rgba(141, 118, 98, 0.16), transparent 52%),
+        linear-gradient(180deg, rgba(249, 246, 240, 0.92), rgba(230, 221, 210, 0.95));
+    }
+
     .badge {
       position: absolute;
       top: 10px;
@@ -414,18 +431,20 @@
       opacity: 0;
       transform: scale(0.4);
     }
+    .pickup-stars span:nth-child(1) {
+      left: var(--star-1x, -999px);
+      top: var(--star-1y, -999px);
+    }
 
-    .market.is-target-never .pickup-stars span:nth-child(1) { left: 178px; top: 98px; }
-    .market.is-target-never .pickup-stars span:nth-child(2) { left: 240px; top: 134px; }
-    .market.is-target-never .pickup-stars span:nth-child(3) { left: 286px; top: 92px; }
+    .pickup-stars span:nth-child(2) {
+      left: var(--star-2x, -999px);
+      top: var(--star-2y, -999px);
+    }
 
-    .market.is-target-whiskas .pickup-stars span:nth-child(1) { left: 460px; top: 98px; }
-    .market.is-target-whiskas .pickup-stars span:nth-child(2) { left: 520px; top: 134px; }
-    .market.is-target-whiskas .pickup-stars span:nth-child(3) { left: 566px; top: 92px; }
-
-    .market.is-target-raid .pickup-stars span:nth-child(1) { left: 742px; top: 98px; }
-    .market.is-target-raid .pickup-stars span:nth-child(2) { left: 802px; top: 134px; }
-    .market.is-target-raid .pickup-stars span:nth-child(3) { left: 848px; top: 92px; }
+    .pickup-stars span:nth-child(3) {
+      left: var(--star-3x, -999px);
+      top: var(--star-3y, -999px);
+    }
 
     .market.is-guiding .pickup-stars span {
       animation: pop 0.8s ease forwards;
@@ -505,15 +524,98 @@
       .page { width: min(1180px, calc(100% - 28px)); }
       .shelf-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .market { padding-bottom: 228px; }
-      .market.is-target-never .pickup-stars span:nth-child(1) { left: 160px; top: 104px; }
-      .market.is-target-never .pickup-stars span:nth-child(2) { left: 214px; top: 140px; }
-      .market.is-target-never .pickup-stars span:nth-child(3) { left: 256px; top: 98px; }
-      .market.is-target-whiskas .pickup-stars span:nth-child(1) { left: 448px; top: 104px; }
-      .market.is-target-whiskas .pickup-stars span:nth-child(2) { left: 502px; top: 140px; }
-      .market.is-target-whiskas .pickup-stars span:nth-child(3) { left: 544px; top: 98px; }
-      .market.is-target-raid .pickup-stars span:nth-child(1) { left: 160px; top: 276px; }
-      .market.is-target-raid .pickup-stars span:nth-child(2) { left: 214px; top: 312px; }
-      .market.is-target-raid .pickup-stars span:nth-child(3) { left: 256px; top: 270px; }
+    }
+
+    @media (max-height: 900px) and (min-width: 901px) {
+      .page {
+        padding-top: 18px;
+        padding-bottom: 40px;
+      }
+
+      .hero {
+        padding: 28px 0 10px;
+      }
+
+      .lead {
+        margin-top: 10px;
+        font-size: 1.02rem;
+        line-height: 1.48;
+      }
+
+      .market {
+        margin-top: 18px;
+        padding: 26px 18px 204px;
+      }
+
+      .market-note {
+        top: 12px;
+      }
+
+      .shelf-row {
+        gap: 12px;
+        padding-top: 22px;
+      }
+
+      .product {
+        padding: 8px;
+      }
+
+      .product-info {
+        padding-top: 6px;
+      }
+
+      .product-info strong {
+        font-size: 1.08rem;
+      }
+
+      .product-info em {
+        font-size: 0.78rem;
+      }
+
+      .product-info span {
+        display: none;
+      }
+
+      .cart-lane {
+        bottom: 18px;
+        height: 154px;
+      }
+
+      .cart-guide-note {
+        bottom: 126px;
+        font-size: 0.88rem;
+      }
+
+      .pickup-note {
+        bottom: 114px;
+        font-size: 0.86rem;
+      }
+
+      .cart-group {
+        --cart-scale: 0.9;
+      }
+    }
+
+    @media (max-height: 760px) and (min-width: 901px) {
+      .hero {
+        padding: 22px 0 6px;
+      }
+
+      .lead {
+        display: none;
+      }
+
+      .market {
+        padding-bottom: 188px;
+      }
+
+      .cart-lane {
+        height: 144px;
+      }
+
+      .cart-group {
+        --cart-scale: 0.84;
+      }
     }
 
     @media (max-width: 640px) {
@@ -528,11 +630,6 @@
       .cart-lane { left: 10px; right: 10px; }
       .cart-group { --cart-scale: 0.8; }
       .pickup-note { right: 10px; bottom: 126px; font-size: 0.84rem; }
-      .market.is-target-never .pickup-stars span:nth-child(1),
-      .market.is-target-whiskas .pickup-stars span:nth-child(1) { top: 92px; }
-      .market.is-target-raid .pickup-stars span:nth-child(1) { left: 154px; top: 252px; }
-      .market.is-target-raid .pickup-stars span:nth-child(2) { left: 206px; top: 286px; }
-      .market.is-target-raid .pickup-stars span:nth-child(3) { left: 246px; top: 246px; }
     }
   </style>
 </head>
@@ -601,7 +698,61 @@
           <div class="product-tag">3</div>
         </a>
 
-        <div class="product empty"></div>
+        <a class="product" href="your-vote-your-voice.html" data-target="vote">
+          <div class="product-top">
+            <img class="cover" src="src/your%20vote%20your%20voice/404%20voice%20not%20found%202%E7%9A%84%E5%89%AF%E6%9C%AC.png" alt="Your Vote Your Voice preview">
+            <div class="badge text-badge">Vote</div>
+          </div>
+          <div class="product-info">
+            <span class="product-type">Civic Campaign</span>
+            <strong>Your Vote, Your Voice</strong>
+            <em>An awareness concept about representation and participation</em>
+            <span>A civic-minded campaign exploring how unheard voices, missing participation, and copy-led visuals can push voting back into public conversation.</span>
+          </div>
+          <div class="product-tag">4</div>
+        </a>
+
+        <a class="product" href="diamond.html" data-target="diamond">
+          <div class="product-top">
+            <img class="cover" src="src/diamond/%E9%92%BB%E7%9F%B3%E6%96%87%E6%A1%881.png" alt="Diamond preview">
+            <div class="badge text-badge">Copy</div>
+          </div>
+          <div class="product-info">
+            <span class="product-type">Luxury Copy Series</span>
+            <strong>Diamond</strong>
+            <em>A poetic copy-led jewelry concept</em>
+            <span>A short series of diamond visuals built around romantic lines that frame jewelry as emotion, chemistry, and a tangible form of love.</span>
+          </div>
+          <div class="product-tag">5</div>
+        </a>
+
+        <a class="product" href="butterworks-farm.html" data-target="butterworks">
+          <div class="product-top">
+            <img class="cover" src="src/butterworks%20farm/idea%203-1%E7%9A%84%E5%89%AF%E6%9C%AC.jpg" alt="Butterworks Farm preview">
+            <div class="badge text-badge">Farm</div>
+          </div>
+          <div class="product-info">
+            <span class="product-type">Brand Visual Concept</span>
+            <strong>Butterworks Farm</strong>
+            <em>A rustic concept rooted in product storytelling</em>
+            <span>A small set of brand visuals that lean into warmth, craft, and pastoral cues to build a grounded, farm-forward product world.</span>
+          </div>
+          <div class="product-tag">6</div>
+        </a>
+
+        <a class="product" href="liquid-death.html" data-target="liquid">
+          <div class="product-top">
+            <div class="cover-copy">Liquid<br>Death</div>
+            <div class="badge text-badge">PDF</div>
+          </div>
+          <div class="product-info">
+            <span class="product-type">Presentation Project</span>
+            <strong>Liquid Death</strong>
+            <em>A campaign deck presented as a PDF narrative</em>
+            <span>A pitch-style project collected in PDF form, added into the portfolio as a browsable presentation rather than a static poster series.</span>
+          </div>
+          <div class="product-tag">7</div>
+        </a>
       </div>
 
       <div class="cart-lane" aria-hidden="true">
@@ -704,8 +855,14 @@
     function resetDirectoryState() {
       navigating = false;
       document.body.classList.remove('is-transitioning');
-      market.classList.remove('is-guiding', 'is-target-never', 'is-target-whiskas', 'is-target-raid');
+      market.classList.remove('is-guiding');
       cartGroup.style.setProperty('--cart-shift-x', '0px');
+      market.style.removeProperty('--star-1x');
+      market.style.removeProperty('--star-1y');
+      market.style.removeProperty('--star-2x');
+      market.style.removeProperty('--star-2y');
+      market.style.removeProperty('--star-3x');
+      market.style.removeProperty('--star-3y');
       document.querySelectorAll('.flying-card').forEach((card) => card.remove());
       products.forEach((product) => {
         product.classList.remove('selected', 'is-hidden');
@@ -728,6 +885,22 @@
       const maxShift = laneRect.right - groupRect.right - 4;
 
       return clamp(desiredShift, minShift, maxShift);
+    }
+
+    function positionPickupStars(product) {
+      const productRect = product.getBoundingClientRect();
+      const marketRect = market.getBoundingClientRect();
+      const localLeft = productRect.left - marketRect.left;
+      const localTop = productRect.top - marketRect.top;
+      const width = productRect.width;
+      const height = productRect.height;
+
+      market.style.setProperty('--star-1x', `${localLeft + width * 0.14}px`);
+      market.style.setProperty('--star-1y', `${localTop + height * 0.3}px`);
+      market.style.setProperty('--star-2x', `${localLeft + width * 0.46}px`);
+      market.style.setProperty('--star-2y', `${localTop + height * 0.58}px`);
+      market.style.setProperty('--star-3x', `${localLeft + width * 0.72}px`);
+      market.style.setProperty('--star-3y', `${localTop + height * 0.26}px`);
     }
 
     function createFlyingCard(product, cartShift) {
@@ -777,10 +950,9 @@
         event.preventDefault();
         navigating = true;
 
-        const target = product.dataset.target;
-        market.classList.remove('is-target-never', 'is-target-whiskas', 'is-target-raid');
-        market.classList.add('is-guiding', `is-target-${target}`);
+        market.classList.add('is-guiding');
         product.classList.add('selected');
+        positionPickupStars(product);
         const cartShift = getCartShift(product);
         cartGroup.style.setProperty('--cart-shift-x', `${cartShift}px`);
         const flyingCard = createFlyingCard(product, cartShift);

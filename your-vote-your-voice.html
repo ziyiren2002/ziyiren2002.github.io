@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Vote, Your Voice</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&display=swap');
+
+    :root {
+      --bg: #f0efeb;
+      --paper: rgba(249, 246, 240, 0.94);
+      --panel: #f7f3ed;
+      --ink: #312b25;
+      --muted: #74695c;
+      --line: rgba(116, 105, 92, 0.18);
+      --accent: #8d7662;
+      --accent-soft: rgba(141, 118, 98, 0.12);
+      --shadow: 0 18px 36px rgba(77, 64, 52, 0.08);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+      background:
+        radial-gradient(circle at top left, rgba(170, 152, 131, 0.12), transparent 26%),
+        linear-gradient(180deg, #f6f3ed 0%, var(--bg) 100%);
+    }
+
+    .page {
+      width: min(1080px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 24px 0 64px;
+      opacity: 0;
+      transform: translateY(14px);
+      animation: page-fade-in 0.55s ease forwards;
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 36px;
+    }
+
+    .brand,
+    .menu a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 1.08rem;
+    }
+
+    .menu {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .intro {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+      gap: 24px;
+      margin-bottom: 28px;
+    }
+
+    .card,
+    .meta-block,
+    .figure {
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+      box-shadow: none;
+    }
+
+    .card {
+      padding: 0;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 0.96rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 16px 0 10px;
+      font-size: clamp(3.1rem, 6vw, 5rem);
+      line-height: 0.95;
+      font-weight: 600;
+      letter-spacing: -0.03em;
+    }
+
+    p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 1.22rem;
+      line-height: 1.72;
+    }
+
+    .meta {
+      display: grid;
+      gap: 18px;
+    }
+
+    .meta-block {
+      padding: 0;
+      background: transparent;
+    }
+
+    .meta-block strong {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--ink);
+      font-size: 1.22rem;
+      font-weight: 600;
+    }
+
+    .meta-block span {
+      display: block;
+      color: var(--muted);
+      font-size: 1.14rem;
+      line-height: 1.68;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
+      align-items: start;
+    }
+
+    .figure {
+      overflow: visible;
+    }
+
+    .figure img {
+      width: 100%;
+      display: block;
+      height: auto;
+    }
+
+    .caption {
+      padding: 16px 0 8px;
+      background: transparent;
+    }
+
+    .caption p {
+      font-size: 1.04rem;
+      line-height: 1.58;
+    }
+
+    @media (max-width: 900px) {
+      .page { width: min(1080px, calc(100% - 28px)); }
+      .nav { flex-direction: column; align-items: flex-start; }
+      .intro { grid-template-columns: 1fr; }
+      .gallery { grid-template-columns: 1fr; }
+    }
+
+    @keyframes page-fade-in {
+      from {
+        opacity: 0;
+        transform: translateY(14px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="nav">
+      <a class="brand" href="index.html">Ziyi Ren</a>
+      <nav class="menu" aria-label="Main">
+        <a href="index.html">Home</a>
+        <a href="projects.html">Project Directory</a>
+      </nav>
+    </header>
+
+    <section class="intro">
+      <article class="card">
+        <span class="eyebrow">Civic Awareness Campaign</span>
+        <h1>Your Vote, Your Voice</h1>
+        <p>
+          This concept uses missing-voice language and poster-led visuals to frame voting as an issue of presence, agency, and representation, pushing the audience to see political silence as something urgent rather than abstract.
+        </p>
+      </article>
+
+      <aside class="meta">
+        <div class="meta-block">
+          <strong>Direction</strong>
+          <span>A copy-led awareness campaign that turns absence, silence, and missing participation into the central visual idea.</span>
+        </div>
+        <div class="meta-block">
+          <strong>Format</strong>
+          <span>Poster executions and supporting campaign visuals that balance direct civic messaging with bold graphic framing.</span>
+        </div>
+        <div class="meta-block">
+          <strong>Tone</strong>
+          <span>Urgent, public-facing, and persuasive, with a visual language that treats every missing vote as a missing voice.</span>
+        </div>
+      </aside>
+    </section>
+
+    <section class="gallery">
+      <figure class="figure">
+        <img src="src/your%20vote%20your%20voice/404%20voice%20not%20found%202%E7%9A%84%E5%89%AF%E6%9C%AC.png" alt="Your Vote Your Voice visual 1">
+        <figcaption class="caption">
+          <p>404 voice not found.</p>
+        </figcaption>
+      </figure>
+
+      <figure class="figure">
+        <img src="src/your%20vote%20your%20voice/404%20voice%20not%20found1%E7%9A%84%E5%89%AF%E6%9C%AC.jpeg" alt="Your Vote Your Voice visual 2">
+        <figcaption class="caption">
+          <p>If you do not vote, your voice does not load.</p>
+        </figcaption>
+      </figure>
+
+      <figure class="figure">
+        <img src="src/your%20vote%20your%20voice/copy%20visual1%E7%9A%84%E5%89%AF%E6%9C%AC.jpeg" alt="Your Vote Your Voice visual 3">
+        <figcaption class="caption">
+          <p>Missing voices leave public decisions incomplete.</p>
+        </figcaption>
+      </figure>
+
+      <figure class="figure">
+        <img src="src/your%20vote%20your%20voice/copy%20visual2%E7%9A%84%E5%89%AF%E6%9C%AC.jpeg" alt="Your Vote Your Voice visual 4">
+        <figcaption class="caption">
+          <p>Participation is how a voice becomes visible.</p>
+        </figcaption>
+      </figure>
+
+      <figure class="figure">
+        <img src="src/your%20vote%20your%20voice/copy%20visual3%E7%9A%84%E5%89%AF%E6%9C%AC.jpeg" alt="Your Vote Your Voice visual 5">
+        <figcaption class="caption">
+          <p>Silence still changes the outcome.</p>
+        </figcaption>
+      </figure>
+
+      <figure class="figure">
+        <img src="src/your%20vote%20your%20voice/404voice%20not%20found3%E7%9A%84%E5%89%AF%E6%9C%AC.png" alt="Your Vote Your Voice visual 6">
+        <figcaption class="caption">
+          <p>Every missing vote leaves a blank space.</p>
+        </figcaption>
+      </figure>
+    </section>
+  </main>
+
+  <script>
+    window.addEventListener('pageshow', () => {
+      const page = document.querySelector('.page');
+      page.style.animation = 'none';
+      page.style.opacity = '1';
+      page.style.transform = 'translateY(0)';
+    });
+  </script>
+</body>
+</html>
