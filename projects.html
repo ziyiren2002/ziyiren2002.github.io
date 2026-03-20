@@ -528,48 +528,59 @@
 
     @media (max-height: 900px) and (min-width: 901px) {
       .page {
-        padding-top: 18px;
-        padding-bottom: 40px;
+        padding-top: 14px;
+        padding-bottom: 28px;
       }
 
       .hero {
-        padding: 28px 0 10px;
+        padding: 20px 0 6px;
+      }
+
+      h1 {
+        font-size: clamp(2.8rem, 5vw, 4.2rem);
       }
 
       .lead {
-        margin-top: 10px;
-        font-size: 1.02rem;
-        line-height: 1.48;
+        display: none;
       }
 
       .market {
-        margin-top: 18px;
-        padding: 26px 18px 204px;
+        margin-top: 12px;
+        padding: 20px 16px 170px;
       }
 
       .market-note {
-        top: 12px;
+        top: 8px;
+        left: 16px;
+        font-size: 0.76rem;
       }
 
       .shelf-row {
-        gap: 12px;
-        padding-top: 22px;
+        gap: 10px;
+        padding-top: 18px;
       }
 
       .product {
-        padding: 8px;
+        padding: 7px;
+      }
+
+      .product-type {
+        font-size: 0.74rem;
       }
 
       .product-info {
-        padding-top: 6px;
+        padding-top: 4px;
       }
 
       .product-info strong {
-        font-size: 1.08rem;
+        margin-top: 4px;
+        font-size: 1rem;
       }
 
       .product-info em {
-        font-size: 0.78rem;
+        margin-top: 3px;
+        font-size: 0.74rem;
+        line-height: 1.1;
       }
 
       .product-info span {
@@ -577,44 +588,37 @@
       }
 
       .cart-lane {
-        bottom: 18px;
-        height: 154px;
+        bottom: 10px;
+        height: 132px;
       }
 
       .cart-guide-note {
-        bottom: 126px;
-        font-size: 0.88rem;
+        bottom: 110px;
+        font-size: 0.82rem;
       }
 
       .pickup-note {
-        bottom: 114px;
-        font-size: 0.86rem;
+        bottom: 100px;
+        right: 10px;
+        font-size: 0.8rem;
       }
 
       .cart-group {
-        --cart-scale: 0.9;
+        --cart-scale: 0.8;
       }
     }
 
     @media (max-height: 760px) and (min-width: 901px) {
-      .hero {
-        padding: 22px 0 6px;
-      }
-
-      .lead {
-        display: none;
-      }
-
       .market {
-        padding-bottom: 188px;
+        padding-bottom: 156px;
       }
 
       .cart-lane {
-        height: 144px;
+        height: 124px;
       }
 
       .cart-group {
-        --cart-scale: 0.84;
+        --cart-scale: 0.74;
       }
     }
 
