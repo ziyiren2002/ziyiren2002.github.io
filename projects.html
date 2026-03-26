@@ -856,7 +856,7 @@
       const zoneRect = machineZone.getBoundingClientRect();
       const iconRect = icon.querySelector('.icon-shell').getBoundingClientRect();
       const rodTip = getRodTipPoint();
-      const iconX = iconRect.left - zoneRect.left + (iconRect.width / 2);
+      const iconX = iconRect.left - zoneRect.left + (iconRect.width / 2) + 8;
       const iconY = iconRect.top - zoneRect.top + (iconRect.height * 0.58);
       const deltaX = iconX - rodTip.x;
       const deltaY = iconY - rodTip.y;

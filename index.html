@@ -91,18 +91,18 @@
 
     h1 {
       margin: 0;
-      font-size: clamp(4rem, 10vw, 6.8rem);
-      line-height: 0.92;
-      font-weight: 600;
-      letter-spacing: -0.04em;
+      font-size: clamp(3.2rem, 8vw, 5.2rem);
+      line-height: 1.02;
+      font-weight: 400;
+      letter-spacing: 0.01em;
     }
 
     .intro {
-      margin: 18px auto 0;
-      max-width: 35rem;
-      color: var(--muted);
-      font-size: 1.2rem;
-      line-height: 1.75;
+      margin: 22px auto 0;
+      max-width: 56rem;
+      color: var(--ink);
+      font-size: clamp(1.34rem, 2.4vw, 1.92rem);
+      line-height: 1.28;
     }
 
     .button-wrap {
@@ -316,49 +316,68 @@
     .button-wrap.is-guiding + .guide-scene .sparkles span:nth-child(2) { animation-delay: 0.12s; }
     .button-wrap.is-guiding + .guide-scene .sparkles span:nth-child(3) { animation-delay: 0.22s; }
 
-    .cv {
+    .contact-links {
       width: min(760px, 100%);
       margin: 0 auto;
-    }
-
-    .section-label {
-      margin: 0 0 16px;
-      color: var(--accent);
-      font-size: 0.98rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    .cv-item {
+      padding-top: 12px;
       display: grid;
-      grid-template-columns: 1fr auto;
+      justify-items: center;
+      gap: 22px;
+    }
+
+    .contact-grid {
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 18px;
-      padding: 18px 0;
-      border-top: 1px solid var(--line);
       align-items: start;
     }
 
-    .cv-item:last-child {
-      border-bottom: 1px solid var(--line);
+    .contact-card {
+      display: grid;
+      justify-items: center;
+      gap: 12px;
+      padding: 10px 8px 0;
+      color: var(--ink);
+      text-decoration: none;
+      text-align: center;
     }
 
-    .cv-role {
-      margin: 0 0 4px;
-      font-size: 1.22rem;
+    .contact-icon {
+      width: 90px;
+      height: 90px;
+      color: var(--accent);
+    }
+
+    .contact-icon svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+      overflow: visible;
+      stroke: currentColor;
+      stroke-width: 2.6;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .contact-label {
+      margin: 0;
+      font-size: 1.26rem;
       font-weight: 600;
     }
 
-    .cv-meta {
-      margin: 0;
-      color: var(--muted);
-      font-size: 1.08rem;
-      line-height: 1.7;
+    .contact-card:hover .contact-icon,
+    .contact-card:focus-visible .contact-icon {
+      transform: translateY(-2px) rotate(-2deg);
     }
 
-    .cv-date {
-      color: var(--muted);
-      font-size: 1.02rem;
-      white-space: nowrap;
+    .contact-card:focus-visible {
+      outline: none;
+    }
+
+    .contact-icon {
+      transition: transform 0.24s ease;
     }
 
     @keyframes doodle-bob {
@@ -449,8 +468,9 @@
         right: 58px;
       }
 
-      .cv-item {
+      .contact-grid {
         grid-template-columns: 1fr;
+        gap: 20px;
       }
     }
   </style>
@@ -468,9 +488,9 @@
     <section class="hero">
       <div class="hero-inner">
         <span class="eyebrow">Portfolio</span>
-        <h1>Ziyi Ren</h1>
+        <h1>I am Ziyi Ren</h1>
         <p class="intro">
-          This is my portfolio, a place for visual work, campaign thinking, and selected projects presented with clarity and restraint.
+          an art director who believes the best work is either genuinely useful or genuinely fun ideally both.
         </p>
         <div class="button-wrap" id="buttonWrap">
           <button class="button" id="directoryButton" type="button">Enter Project Directory</button>
@@ -518,48 +538,44 @@
       </div>
     </section>
 
-    <section class="cv" aria-label="CV">
-      <p class="section-label">CV</p>
+    <section class="contact-links" aria-label="Contact Links">
+      <div class="contact-grid">
+        <a class="contact-card" href="#" aria-label="Open resume">
+          <div class="contact-icon" aria-hidden="true">
+            <svg viewBox="0 0 96 96">
+              <path d="M28 20h26l14 14v40a8 8 0 0 1-8 8H28a8 8 0 0 1-8-8V28a8 8 0 0 1 8-8z"></path>
+              <path d="M54 20v14h14"></path>
+              <path d="M32 46c5-6 11-8 16-6 4 1 6 5 5 9-2 6-9 8-14 7"></path>
+              <path d="M35 63c7-2 12-1 17 3"></path>
+            </svg>
+          </div>
+          <p class="contact-label">Resume</p>
+        </a>
 
-      <article class="cv-item">
-        <div>
-          <p class="cv-role">Placeholder Role One</p>
-          <p class="cv-meta">Placeholder organization or short description for future CV content.</p>
-        </div>
-        <div class="cv-date">00.00 - 00.00</div>
-      </article>
+        <a class="contact-card" href="mailto:" aria-label="Send email">
+          <div class="contact-icon" aria-hidden="true">
+            <svg viewBox="0 0 96 96">
+              <path d="M18 30h60a8 8 0 0 1 8 8v22a8 8 0 0 1-8 8H18a8 8 0 0 1-8-8V38a8 8 0 0 1 8-8z"></path>
+              <path d="M15 37l33 22 33-22"></path>
+              <path d="M26 28c3-7 10-12 18-12 9 0 17 5 20 13"></path>
+            </svg>
+          </div>
+          <p class="contact-label">Email</p>
+        </a>
 
-      <article class="cv-item">
-        <div>
-          <p class="cv-role">Placeholder Role Two</p>
-          <p class="cv-meta">Placeholder organization or short description for future CV content.</p>
-        </div>
-        <div class="cv-date">00.00 - 00.00</div>
-      </article>
-
-      <article class="cv-item">
-        <div>
-          <p class="cv-role">Placeholder Role Three</p>
-          <p class="cv-meta">Placeholder organization or short description for future CV content.</p>
-        </div>
-        <div class="cv-date">00.00 - 00.00</div>
-      </article>
-
-      <article class="cv-item">
-        <div>
-          <p class="cv-role">Placeholder Role Four</p>
-          <p class="cv-meta">Placeholder organization or short description for future CV content.</p>
-        </div>
-        <div class="cv-date">00.00 - 00.00</div>
-      </article>
-
-      <article class="cv-item">
-        <div>
-          <p class="cv-role">Placeholder Role Five</p>
-          <p class="cv-meta">Placeholder organization or short description for future CV content.</p>
-        </div>
-        <div class="cv-date">00.00 - 00.00</div>
-      </article>
+        <a class="contact-card" href="#" aria-label="Open LinkedIn">
+          <div class="contact-icon" aria-hidden="true">
+            <svg viewBox="0 0 96 96">
+              <rect x="18" y="22" width="60" height="52" rx="8"></rect>
+              <path d="M32 41v21"></path>
+              <circle cx="32" cy="33" r="3"></circle>
+              <path d="M45 62V44"></path>
+              <path d="M45 50c1-5 4-8 9-8 6 0 10 4 10 12v8"></path>
+            </svg>
+          </div>
+          <p class="contact-label">LinkedIn</p>
+        </a>
+      </div>
     </section>
   </main>
 

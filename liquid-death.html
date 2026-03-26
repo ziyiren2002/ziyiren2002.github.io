@@ -17,6 +17,7 @@
       --accent: #8d7662;
       --accent-soft: rgba(141, 118, 98, 0.12);
       --shadow: 0 18px 36px rgba(77, 64, 52, 0.08);
+      --stage: #ebe4da;
     }
 
     * { box-sizing: border-box; }
@@ -90,7 +91,8 @@
     }
 
     .eyebrow {
-      display: inline-block;
+      display: inline-flex;
+      align-self: center;
       margin-bottom: 16px;
       padding: 7px 12px;
       border-radius: 999px;
@@ -116,9 +118,45 @@
       line-height: 1.72;
     }
 
+    .campaign-note {
+      margin-top: 26px;
+      text-align: left;
+      max-width: 40rem;
+    }
+
+    .campaign-note p {
+      color: var(--ink);
+      font-size: 1.34rem;
+      line-height: 1.44;
+    }
+
+    .campaign-note p + p {
+      margin-top: 16px;
+    }
+
+    .campaign-note .lead-line {
+      font-size: 1.62rem;
+      line-height: 1.22;
+      font-weight: 600;
+    }
+
+    .campaign-note ul {
+      margin: 16px 0 0 24px;
+      padding: 0;
+      color: var(--ink);
+      font-size: 1.18rem;
+      line-height: 1.52;
+    }
+
+    .campaign-note a {
+      color: var(--ink);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 0.14em;
+    }
+
     .meta {
       display: grid;
-      gap: 18px;
+      gap: 14px;
     }
 
     .meta-block {
@@ -141,22 +179,48 @@
       line-height: 1.68;
     }
 
+    .utility-list {
+      margin: 0 0 0 24px;
+      padding: 0;
+      color: var(--ink);
+      font-size: 1.18rem;
+      line-height: 1.52;
+    }
+
+    .utility-link {
+      display: inline-block;
+      margin-top: 22px;
+      margin-left: 78px;
+      color: var(--ink);
+      font-size: 1.36rem;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 0.14em;
+    }
+
     .gallery {
       display: grid;
       grid-template-columns: 1fr;
       gap: 22px;
-      align-items: start;
     }
 
     .figure {
       overflow: visible;
     }
 
-    .pdf-frame {
+    .visual-stage {
+      display: grid;
+      place-items: center;
+      min-height: 0;
+      padding: 0;
+      background: transparent;
+    }
+
+    .visual-stage img {
       width: 100%;
-      height: min(78vh, 1080px);
-      border: 0;
       display: block;
+      height: auto;
+      object-fit: contain;
+      border-radius: 0;
       background: transparent;
     }
 
@@ -171,10 +235,6 @@
       line-height: 1.58;
     }
 
-    .caption a {
-      color: var(--accent);
-    }
-
     @media (max-width: 900px) {
       .page { width: min(1080px, calc(100% - 28px)); }
       .nav { flex-direction: column; align-items: flex-start; }
@@ -184,7 +244,11 @@
         align-items: flex-start;
         text-align: left;
       }
-      .pdf-frame { height: 72vh; }
+      .eyebrow { align-self: flex-start; }
+      .campaign-note { text-align: left; }
+      .utility-link {
+        margin-left: 0;
+      }
     }
 
     @keyframes page-fade-in {
@@ -211,34 +275,63 @@
 
     <section class="intro">
       <article class="card">
-        <span class="eyebrow">Presentation Project</span>
         <h1>Liquid Death</h1>
-        <p>
-          This project is presented as a campaign deck, so instead of a poster-by-poster gallery, the work lives here as an embedded PDF that can be read inside the portfolio with the same overall visual structure.
-        </p>
+        <div class="campaign-note">
+          <p class="lead-line">Love kills parts of you. Let's bury them.</p>
+          <p>This Valentine's Day, we built an online cemetery for everything love has "killed."</p>
+          <p>Don't buy love. Kill for it.</p>
+          <p>#DontBuyLoveKillForIt</p>
+        </div>
       </article>
 
       <aside class="meta">
         <div class="meta-block">
-          <strong>Format</strong>
-          <span>A PDF-based presentation that reads more like a pitch narrative than a single static execution.</span>
-        </div>
-        <div class="meta-block">
-          <strong>Viewing Mode</strong>
-          <span>Embedded directly into the portfolio so the work can still be browsed as part of the same site experience.</span>
-        </div>
-        <div class="meta-block">
-          <strong>Focus</strong>
-          <span>A campaign idea organized as a deck, letting concept, copy, and pacing unfold in sequence.</span>
+          <strong>Inside the cemetery, users can:</strong>
+          <ul class="utility-list">
+            <li>Create a tombstone for what they've lost</li>
+            <li>Write an epitaph ("My freedom to eat the last slice")</li>
+            <li>Light a candle</li>
+            <li>Share their grave on social media</li>
+          </ul>
+          <a class="utility-link" href="https://whatwekillforlove.netlify.app/" target="_blank" rel="noopener noreferrer">Explore the cemetery</a>
         </div>
       </aside>
     </section>
 
     <section class="gallery">
       <figure class="figure">
-        <iframe class="pdf-frame" src="src/liquid death/whatwekillforlove web-ziyi nicole.pdf#view=FitH" title="Liquid Death PDF"></iframe>
+        <div class="visual-stage">
+          <img src="src/liquid death/1.png" alt="Liquid Death Cemetery Grid screenshot">
+        </div>
         <figcaption class="caption">
-          <p>Read the full project deck here. If the embed does not load, open it directly: <a href="src/liquid death/whatwekillforlove web-ziyi nicole.pdf" target="_blank" rel="noopener noreferrer">view the PDF</a>.</p>
+          <p>The landing view reads like a romantic graveyard built by Liquid Death, where heartbreak and bad standards are turned into darkly funny tombstones.</p>
+        </figcaption>
+      </figure>
+
+      <figure class="figure">
+        <div class="visual-stage">
+          <img src="src/liquid death/2.png" alt="Liquid Death Cemetery Grid detail screenshot">
+        </div>
+        <figcaption class="caption">
+          <p>This part of the site establishes the campaign tone right away: gothic, funny, and self-aware, with each burial pushing the joke deeper.</p>
+        </figcaption>
+      </figure>
+
+      <figure class="figure">
+        <div class="visual-stage">
+          <img src="src/liquid death/3.png" alt="Liquid Death Epitaph Builder screenshot">
+        </div>
+        <figcaption class="caption">
+          <p>The epitaph builder turns the campaign into a participatory tool, letting visitors write and bury their own doomed standards for love.</p>
+        </figcaption>
+      </figure>
+
+      <figure class="figure">
+        <div class="visual-stage">
+          <img src="src/liquid death/4.png" alt="Liquid Death Casualty Census screenshot">
+        </div>
+        <figcaption class="caption">
+          <p>The casualty census scales the idea up, making the microsite feel like a live archive of everything people are willing to kill for love.</p>
         </figcaption>
       </figure>
     </section>
