@@ -857,7 +857,7 @@
       const isCompact = window.innerWidth <= 640;
       if (isCompact && typeof event.clientX === 'number' && typeof event.clientY === 'number') {
         return {
-          x: event.clientX + window.scrollX,
+          x: event.clientX + window.scrollX + 44,
           y: event.clientY + window.scrollY
         };
       }
