@@ -853,6 +853,17 @@
       };
     }
 
+    function getLockedTargetPoint(icon, event) {
+      const isCompact = window.innerWidth <= 640;
+      if (isCompact && typeof event.clientX === 'number' && typeof event.clientY === 'number') {
+        return {
+          x: event.clientX + window.scrollX,
+          y: event.clientY + window.scrollY
+        };
+      }
+      return getIconTargetPagePoint(icon);
+    }
+
     function getElementRotationDegrees(element) {
       const transform = window.getComputedStyle(element).transform;
       if (!transform || transform === 'none') {
@@ -899,7 +910,7 @@
       targetTilt = 0.08;
       targetTurn = -0.1;
       let metrics;
-      const lockedTargetPoint = getIconTargetPagePoint(icon);
+      const lockedTargetPoint = getLockedTargetPoint(icon, event);
       const lineLaunchMs = PRECAST_MS + ROD_CAST_MS;
 
       window.setTimeout(() => {
