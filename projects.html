@@ -555,49 +555,49 @@
       <div class="field-note">tap an icon and the claw will swing down to catch it</div>
 
       <div class="icon-field" id="iconField">
-        <a class="project-icon" href="never-again.html" style="--left:16%; --top:34%; --tilt:-7deg;">
+        <a class="project-icon" href="never-again.html" data-target-x="0.5" data-target-y="0.58" style="--left:16%; --top:34%; --tilt:-7deg;">
           <div class="icon-shell">
             <img src="src/icon_on_directory/21grams_raw.png" alt="Never Again icon">
           </div>
           <div class="icon-label">Never Again</div>
         </a>
 
-        <a class="project-icon" href="whiskas.html" style="--left:38%; --top:40%; --tilt:6deg;">
+        <a class="project-icon" href="whiskas.html" data-target-x="0.5" data-target-y="0.58" style="--left:38%; --top:40%; --tilt:6deg;">
           <div class="icon-shell">
             <img src="src/icon_on_directory/whiskas_removebg-preview.png" alt="Whiskas icon">
           </div>
           <div class="icon-label">Whiskas</div>
         </a>
 
-        <a class="project-icon" href="raid.html" style="--left:61%; --top:33%; --tilt:-5deg;">
+        <a class="project-icon" href="raid.html" data-target-x="0.5" data-target-y="0.58" style="--left:61%; --top:33%; --tilt:-5deg;">
           <div class="icon-shell">
             <img src="src/icon_on_directory/raid_raw-removebg-preview.png" alt="RAID icon">
           </div>
           <div class="icon-label">RAID</div>
         </a>
 
-        <a class="project-icon" href="your-vote-your-voice.html" style="--left:83%; --top:39%; --tilt:7deg;">
+        <a class="project-icon" href="your-vote-your-voice.html" data-target-x="0.5" data-target-y="0.58" style="--left:83%; --top:39%; --tilt:7deg;">
           <div class="icon-shell">
             <img src="src/icon_on_directory/404_raw.png" alt="404 Voice Not Found icon">
           </div>
           <div class="icon-label">404 Voice<br>Not Found</div>
         </a>
 
-        <a class="project-icon" href="diamond.html" style="--left:23%; --top:72%; --tilt:5deg;">
+        <a class="project-icon" href="diamond.html" data-target-x="0.6" data-target-y="0.58" style="--left:23%; --top:72%; --tilt:5deg;">
           <div class="icon-shell">
             <img src="src/icon_on_directory/Dimond-removebg-preview.png" alt="Diamond icon">
           </div>
           <div class="icon-label">Diamond</div>
         </a>
 
-        <a class="project-icon" href="butterworks-farm.html" style="--left:50%; --top:66%; --tilt:-6deg;">
+        <a class="project-icon" href="butterworks-farm.html" data-target-x="0.52" data-target-y="0.58" style="--left:50%; --top:66%; --tilt:-6deg;">
           <div class="icon-shell">
             <img src="src/icon_on_directory/butterworks_raw-removebg-preview.png" alt="Butterworks Farm icon">
           </div>
           <div class="icon-label">Butterworks Farm</div>
         </a>
 
-        <a class="project-icon" href="liquid-death.html" style="--left:77%; --top:71%; --tilt:-4deg;">
+        <a class="project-icon" href="liquid-death.html" data-target-x="0.5" data-target-y="0.58" style="--left:77%; --top:71%; --tilt:-4deg;">
           <div class="icon-shell">
             <img src="src/icon_on_directory/liquid_raw-removebg-preview.png" alt="Liquid Death icon">
           </div>
@@ -844,10 +844,12 @@
 
     function getIconTargetPagePoint(icon) {
       const iconRect = icon.querySelector('.icon-shell').getBoundingClientRect();
-      const mobileTargetOffsetX = window.innerWidth <= 640 ? 12 : 8;
+      const targetRatioX = Number(icon.dataset.targetX || 0.5);
+      const targetRatioY = Number(icon.dataset.targetY || 0.58);
+      const mobileTargetOffsetX = window.innerWidth <= 640 ? 20 : 8;
       return {
-        x: iconRect.left + window.scrollX + (iconRect.width / 2) + mobileTargetOffsetX,
-        y: iconRect.top + window.scrollY + (iconRect.height * 0.58)
+        x: iconRect.left + window.scrollX + (iconRect.width * targetRatioX) + mobileTargetOffsetX,
+        y: iconRect.top + window.scrollY + (iconRect.height * targetRatioY)
       };
     }
 
