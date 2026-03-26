@@ -834,12 +834,19 @@
       machineZone.classList.add('is-holding');
     }
 
-    function getRodTipPoint() {
-      const zoneRect = machineZone.getBoundingClientRect();
+    function getRodTipPagePoint() {
       const tipRect = rodTip.getBoundingClientRect();
       return {
-        x: tipRect.left - zoneRect.left + (tipRect.width / 2),
-        y: tipRect.top - zoneRect.top + (tipRect.height / 2)
+        x: tipRect.left + window.scrollX + (tipRect.width / 2),
+        y: tipRect.top + window.scrollY + (tipRect.height / 2)
+      };
+    }
+
+    function getIconTargetPagePoint(icon) {
+      const iconRect = icon.querySelector('.icon-shell').getBoundingClientRect();
+      return {
+        x: iconRect.left + window.scrollX + (iconRect.width / 2) + 8,
+        y: iconRect.top + window.scrollY + (iconRect.height * 0.58)
       };
     }
 
@@ -852,14 +859,10 @@
       return Math.atan2(matrix.b, matrix.a) * (180 / Math.PI);
     }
 
-    function getShotMetrics(icon) {
-      const zoneRect = machineZone.getBoundingClientRect();
-      const iconRect = icon.querySelector('.icon-shell').getBoundingClientRect();
-      const rodTip = getRodTipPoint();
-      const iconX = iconRect.left - zoneRect.left + (iconRect.width / 2) + 8;
-      const iconY = iconRect.top - zoneRect.top + (iconRect.height * 0.58);
-      const deltaX = iconX - rodTip.x;
-      const deltaY = iconY - rodTip.y;
+    function getShotMetrics(targetPoint) {
+      const rodTip = getRodTipPagePoint();
+      const deltaX = targetPoint.x - rodTip.x;
+      const deltaY = targetPoint.y - rodTip.y;
       const absoluteAngle = Math.atan2(-deltaX, deltaY) * (180 / Math.PI);
       const rodAngle = getElementRotationDegrees(fishingRod);
       const hookLength = Math.max(0, Math.hypot(deltaX, deltaY) - 26);
@@ -893,6 +896,7 @@
       targetTilt = 0.08;
       targetTurn = -0.1;
       let metrics;
+      const lockedTargetPoint = getIconTargetPagePoint(icon);
       const lineLaunchMs = PRECAST_MS + ROD_CAST_MS;
 
       window.setTimeout(() => {
@@ -903,7 +907,7 @@
       }, PRECAST_MS);
 
       window.setTimeout(() => {
-        metrics = getShotMetrics(icon);
+        metrics = getShotMetrics(lockedTargetPoint);
         machineZone.classList.add('is-guiding');
         hookAssembly.style.setProperty('--hook-angle', `${metrics.hookAngle}deg`);
         hookAssembly.style.setProperty('--hook-length', `${metrics.hookLength}px`);
